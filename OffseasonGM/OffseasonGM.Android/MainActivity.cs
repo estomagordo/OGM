@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 using Android.App;
 using Android.Content.PM;
@@ -20,7 +21,12 @@ namespace OffseasonGM.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+
+            var dbFileName = "OGM.db3";
+            var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            var filePath = Path.Combine(path, dbFileName);
+
+            LoadApplication(new App(filePath));
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using OffseasonGM.Assets.Repositories;
 
 using Xamarin.Forms;
 
@@ -9,11 +6,17 @@ namespace OffseasonGM
 {
     public partial class App : Application
     {
-        public App()
+        public static NationReposistory NationRepo { get; private set; }
+        public static FirstNameRepository FirstNameRepo { get; private set; }
+
+        public App(string dbPath)
         {
             InitializeComponent();
 
-            MainPage = new OffseasonGM.MainPage();
+            NationRepo = new NationReposistory(dbPath);
+            FirstNameRepo = new FirstNameRepository(dbPath);
+
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
