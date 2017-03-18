@@ -1,0 +1,10 @@
+﻿Allen|Canada|USA
+Alan|Canada|USA
+Peter|Canada|USA|Sweden|Germany|Switzerland|Austria
+George|Canada|USA
+Lance|Canada|USA
+Sven|Sweden
+Jens|Sweden
+Jari|Finland
+Bert|Canada|USA|Switzerland
+Jacques|Canada|France|Switzerland
