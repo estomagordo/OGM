@@ -16,8 +16,13 @@ namespace OffseasonGM.Assets.Repositories
         public NationReposistory(string dbPath)
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-            var entriesCreatedCount = connection.CreateTable<Nation>();
-            SeedNations();
+            connection.CreateTable<Nation>();            
+            var nationCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Nation");
+
+            if (nationCount == 0)
+            {
+                SeedNations();
+            }            
         }
 
         public void AddNewNation(string name, string adjective, double frequency)
@@ -46,7 +51,7 @@ namespace OffseasonGM.Assets.Repositories
             {
                 while ((line = reader.ReadLine()) != null)
                 {
-                    var row = reader.ReadLine().Split('|');
+                    var row = line.Split('|');
                     var name = row[0];
                     var adjective = row[1];
                     var frequency = double.Parse(row[2]);
