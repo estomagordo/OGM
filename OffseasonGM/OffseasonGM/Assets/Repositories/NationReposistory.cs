@@ -43,14 +43,18 @@ namespace OffseasonGM.Assets.Repositories
         private void SeedNations()
         {
             var assembly = typeof(MainPage).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream("OffseasonGM.Nations.txt");
+            var stream = assembly.GetManifestResourceStream("OffseasonGM.Assets.Text.Nations.txt");
+            string line;
             using (var reader = new StreamReader(stream))
             {
-                var line = reader.ReadLine().Split('|');
-                var name = line[0];
-                var adjective = line[1];
-                var frequency = double.Parse(line[2]);
-                AddNewNation(name, adjective, frequency);
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var row = reader.ReadLine().Split('|');
+                    var name = row[0];
+                    var adjective = row[1];
+                    var frequency = double.Parse(row[2]);
+                    AddNewNation(name, adjective, frequency);
+                }
             }
         }
     }
