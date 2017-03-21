@@ -38,15 +38,22 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Assets\Repositories\CityRepository.cs" />
     <Compile Include="Assets\Repositories\FirstNameRepository.cs" />
+    <Compile Include="Assets\Repositories\LastNameRepository.cs" />
     <Compile Include="Assets\Repositories\NationFirstNameRepository.cs" />
     <Compile Include="Assets\Repositories\NationReposistory.cs" />
+    <Compile Include="Assets\Repositories\NickNameRepository.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\City.cs" />
     <Compile Include="Models\FirstName.cs" />
+    <Compile Include="Models\LastName.cs" />
     <Compile Include="Models\Nation.cs" />
     <Compile Include="Models\NationFirstName.cs" />
+    <Compile Include="Models\NationLastName.cs" />
+    <Compile Include="Models\NickName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,9 +107,9 @@
     <EmbeddedResource Include="Assets\Text\Nations.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Text\Cities.txt" />
-    <Content Include="Assets\Text\LastNames.txt" />
-    <Content Include="Assets\Text\NickNames.txt" />
+    <EmbeddedResource Include="Assets\Text\Cities.txt" />
+    <EmbeddedResource Include="Assets\Text\LastNames.txt" />
+    <EmbeddedResource Include="Assets\Text\NickNames.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

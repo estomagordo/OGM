@@ -18,5 +18,8 @@ namespace OffseasonGM.Models
 
         [ManyToMany(typeof(NationFirstName))]
         public List<FirstName> FirstNames { get; set; }
+
+        [ManyToMany(typeof(NationLastName))]
+        public List<LastName> LastNames { get; set; }
     }
 }

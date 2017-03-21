@@ -18,6 +18,8 @@ namespace OffseasonGM.Assets.Repositories
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
 
+            connection.CreateTable<NationLastName>();
+            connection.CreateTable<LastName>();
             connection.CreateTable<Nation>();
             connection.DeleteAll<Nation>(); // Temporary
             var nationCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Nation");
@@ -32,7 +34,7 @@ namespace OffseasonGM.Assets.Repositories
         {
             try
             {
-                connection.Insert(new Nation { Name = name, Adjective = adjective, Frequency = frequency, FirstNames = new List<FirstName>() });
+                connection.Insert(new Nation { Name = name, Adjective = adjective, Frequency = frequency, FirstNames = new List<FirstName>(), LastNames = new List<LastName>() });
             }
             catch (Exception e)
             {

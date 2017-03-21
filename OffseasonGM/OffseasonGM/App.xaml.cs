@@ -9,6 +9,9 @@ namespace OffseasonGM
         public static NationFirstNameRepository NationFirstNameRepo { get; private set; }
         public static NationReposistory NationRepo { get; private set; }
         public static FirstNameRepository FirstNameRepo { get; private set; }
+        public static LastNameRepository LastNameRepo { get; private set; }
+        public static CityRepository CityRepo { get; private set; }
+        public static NickNameRepository NickNameRepo { get; private set; }
 
         public App(string dbPath)
         {
@@ -17,6 +20,9 @@ namespace OffseasonGM
             NationFirstNameRepo = new NationFirstNameRepository(dbPath);
             NationRepo = new NationReposistory(dbPath);
             FirstNameRepo = new FirstNameRepository(dbPath);
+            LastNameRepo = new LastNameRepository(dbPath);
+            CityRepo = new CityRepository(dbPath);
+            NickNameRepo = new NickNameRepository(dbPath);
 
             MainPage = new MainPage();
         }
