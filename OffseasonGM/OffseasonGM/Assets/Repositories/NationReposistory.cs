@@ -17,10 +17,7 @@ namespace OffseasonGM.Assets.Repositories
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
             var entriesCreatedCount = connection.CreateTable<Nation>();
-            if (entriesCreatedCount < 1)
-            {
-                SeedNations();
-            }
+            SeedNations();
         }
 
         public void AddNewNation(string name, string adjective, double frequency)
