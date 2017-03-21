@@ -1,5 +1,6 @@
 ﻿using OffseasonGM.Models;
 using SQLite.Net;
+using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,9 @@ namespace OffseasonGM.Assets.Repositories
         public NationReposistory(string dbPath)
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-            connection.CreateTable<Nation>();            
+
+            connection.CreateTable<Nation>();
+            connection.DeleteAll<Nation>(); // Temporary
             var nationCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Nation");
 
             if (nationCount == 0)
@@ -29,7 +32,7 @@ namespace OffseasonGM.Assets.Repositories
         {
             try
             {
-                connection.Insert(new Nation { Name = name, Adjective = adjective, Frequency = frequency });
+                connection.Insert(new Nation { Name = name, Adjective = adjective, Frequency = frequency, FirstNames = new List<FirstName>() });
             }
             catch (Exception e)
             {
@@ -39,7 +42,7 @@ namespace OffseasonGM.Assets.Repositories
 
         public List<Nation> GetAllNations()
         {
-            return connection.Table<Nation>().ToList();
+            return connection.GetAllWithChildren<Nation>().ToList();
         }
 
         private void SeedNations()
