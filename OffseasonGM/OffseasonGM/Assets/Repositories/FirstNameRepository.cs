@@ -1,5 +1,6 @@
 ﻿using OffseasonGM.Models;
 using SQLite;
+using SQLite.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace OffseasonGM.Assets.Repositories
 
         public FirstNameRepository(string dbPath)
         {
-            connection = new SQLiteConnection(dbPath);
+            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
             connection.CreateTable<FirstName>();
         }
 

@@ -6,6 +6,7 @@ namespace OffseasonGM
 {
     public partial class App : Application
     {
+        public static NationFirstNameRepository NationFirstNameRepo { get; private set; }
         public static NationReposistory NationRepo { get; private set; }
         public static FirstNameRepository FirstNameRepo { get; private set; }
 
@@ -13,6 +14,7 @@ namespace OffseasonGM
         {
             InitializeComponent();
 
+            NationFirstNameRepo = new NationFirstNameRepository(dbPath);
             NationRepo = new NationReposistory(dbPath);
             FirstNameRepo = new FirstNameRepository(dbPath);
 
