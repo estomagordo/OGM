@@ -5,8 +5,7 @@ using Xamarin.Forms;
 namespace OffseasonGM
 {
     public partial class App : Application
-    {
-        public static NationFirstNameRepository NationFirstNameRepo { get; private set; }
+    {        
         public static NationReposistory NationRepo { get; private set; }
         public static FirstNameRepository FirstNameRepo { get; private set; }
         public static LastNameRepository LastNameRepo { get; private set; }
@@ -16,8 +15,7 @@ namespace OffseasonGM
         public App(string dbPath)
         {
             InitializeComponent();
-
-            NationFirstNameRepo = new NationFirstNameRepository(dbPath);
+            
             NationRepo = new NationReposistory(dbPath);
             FirstNameRepo = new FirstNameRepository(dbPath);
             LastNameRepo = new LastNameRepository(dbPath);

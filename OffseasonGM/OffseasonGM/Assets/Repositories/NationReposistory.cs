@@ -19,6 +19,7 @@ namespace OffseasonGM.Assets.Repositories
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
 
             connection.CreateTable<NationLastName>();
+            connection.CreateTable<NationFirstName>();
             connection.CreateTable<LastName>();
             connection.CreateTable<Nation>();
             connection.DeleteAll<Nation>(); // Temporary
