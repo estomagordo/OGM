@@ -1,17 +1,57 @@
+Albuquerque|35.06|106.36
+Austin|30.16|97.45
+Baltimore|39.17|76.37
+Boston|42.21|71.03
+Brampton|43.41|79.46
 Bronx|40.50|73.53
 Brooklyn|40.37|73.57
 Calgary|51.03|114.04
+Charlotte|35.13|80.5
 Chicago|41.50|87.41
+Columbus|39.59|82.59
 Dallas|32.46|96.47
+Denver|39.45|104.52
+Detroit|42.19|83.02
+Edmonton|53.32|113.3
+El Paso|31.47|106.25
+Fort Worth|32.45|97.19
+Fresno|36.45|119.46
+Hamilton|43.15|79.52
 Houston|29.45|95.22
+Indianapolis|39.46|86.09
+Jacksonville|30.2|81.39
+Kitchener|43.27|80.29
+Las Vegas|36.1|115.08
+Laval|45.35|73.45
+London|42.98|81.24
 Los Angeles|34.03|118.15
+Louisville|38.13|85.44
 Manhattan|40.43|73.59
+Markham|43.53|79.15
+Memphis|35.07|89.58
+Milwaukee|43.03|87.57
+Mississauga|43.36|79.39
 Montréal|45.3|73.34
+Nashville|36.1|86.47
 New York|40.42|74.0
+Oklahoma City|35.28|97.32
+Ottawa|45.25|75.41
 Philadelphia|39.57|75.1
 Phoenix|33.27|112.04
+Portland|45.31|122.4
+Québec|46.49|71.13
 Queens|40.45|73.52
+Regina|50.27|104.36
 San Antonio|29.25|98.3
 San Diego|32.42|117.09
+San Francisco|37.47|122.25
+San Jose|37.2|121.54
+Saskatoon|52.08|106.41
+Seattle|47.36|122.19
 Staten Island|40.34|74.08
+Surrey|49.11|122.51
 Toronto|43.42|79.24
+Tucson|32.13|110.55
+Vancouver|49.15|123.06
+Washington|38.54|77.0
+Winnipeg|49.53|97.08
