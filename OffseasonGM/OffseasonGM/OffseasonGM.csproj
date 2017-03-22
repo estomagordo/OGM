@@ -50,10 +50,18 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\FirstName.cs" />
     <Compile Include="Models\LastName.cs" />
+    <Compile Include="Models\League.cs" />
+    <Compile Include="Models\Match.cs" />
+    <Compile Include="Models\MatchPlayer.cs" />
     <Compile Include="Models\Nation.cs" />
     <Compile Include="Models\NationFirstName.cs" />
     <Compile Include="Models\NationLastName.cs" />
     <Compile Include="Models\NickName.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Season.cs" />
+    <Compile Include="Models\SeasonPlayer.cs" />
+    <Compile Include="Models\SeasonTeam.cs" />
+    <Compile Include="Models\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

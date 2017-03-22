@@ -1,17 +1,17 @@
 ﻿using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
-using System.Collections.Generic;
 
 namespace OffseasonGM.Models
 {
-    public class NickName
+    public class SeasonPlayer
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        [ForeignKey(typeof(Season))]
+        public int SeasonId { get; set; }
 
-        [OneToMany]
-        public List<Team> Teams { get; set; }
+        [ForeignKey(typeof(Player))]
+        public int PlayerId { get; set; }
     }
 }

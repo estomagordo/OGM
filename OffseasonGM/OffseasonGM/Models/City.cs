@@ -1,9 +1,6 @@
 ﻿using SQLite.Net.Attributes;
-using System;
+using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OffseasonGM.Models
 {
@@ -16,6 +13,9 @@ namespace OffseasonGM.Models
 
         public double Latitude { get; set; }
 
-        public double Longitude { get; set; }        
+        public double Longitude { get; set; }
+
+        [OneToMany]
+        public List<Team> Teams { get; set; }
     }
 }
