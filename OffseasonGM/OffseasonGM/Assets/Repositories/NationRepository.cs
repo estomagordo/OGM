@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace OffseasonGM.Assets.Repositories
 {
-    public class NationReposistory
+    public class NationRepository
     {
         SQLiteConnection connection;
 
-        public NationReposistory(string dbPath)
+        public NationRepository(string dbPath)
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);            
             

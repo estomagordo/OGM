@@ -7,11 +7,17 @@ namespace OffseasonGM
     public partial class App : Application
     {        
         public static GeneralRepository GeneralRepo { get; private set; }
-        public static NationReposistory NationRepo { get; private set; }
+
+        public static CityRepository CityRepo { get; private set; }
         public static FirstNameRepository FirstNameRepo { get; private set; }
         public static LastNameRepository LastNameRepo { get; private set; }
-        public static CityRepository CityRepo { get; private set; }
+        public static LeagueRepository LeagueRepo { get; private set; }
+        public static MatchRepository MatchRepo { get; private set; }
+        public static NationRepository NationRepo { get; private set; }        
         public static NickNameRepository NickNameRepo { get; private set; }
+        public static PlayerRepository PlayerRepo { get; private set; }
+        public static SeasonRepository SeasonRepo { get; private set; }
+        public static TeamRepository TeamRepo { get; private set; }
 
         public App(string dbPath)
         {
@@ -39,11 +45,17 @@ namespace OffseasonGM
         private void InitializeRepositories(string dbPath)
         {
             GeneralRepo = new GeneralRepository(dbPath);
-            NationRepo = new NationReposistory(dbPath);
+
+            CityRepo = new CityRepository(dbPath);            
             FirstNameRepo = new FirstNameRepository(dbPath);
             LastNameRepo = new LastNameRepository(dbPath);
-            CityRepo = new CityRepository(dbPath);
+            LeagueRepo = new LeagueRepository(dbPath);
+            MatchRepo = new MatchRepository(dbPath);
+            NationRepo = new NationRepository(dbPath);
             NickNameRepo = new NickNameRepository(dbPath);
+            PlayerRepo = new PlayerRepository(dbPath);
+            SeasonRepo = new SeasonRepository(dbPath);
+            TeamRepo = new TeamRepository(dbPath);
         }
     }
 }

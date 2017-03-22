@@ -16,24 +16,40 @@ namespace OffseasonGM.Assets.Repositories
 
         private void CreateAllTables()
         {
-            connection.CreateTable<Nation>();
             connection.CreateTable<City>();
             connection.CreateTable<FirstName>();
-            connection.CreateTable<LastName>();            
+            connection.CreateTable<LastName>();
+            connection.CreateTable<League>();
+            connection.CreateTable<Match>();
+            connection.CreateTable<Nation>();
             connection.CreateTable<NickName>();
+            connection.CreateTable<Player>();
+            connection.CreateTable<Season>();
+            connection.CreateTable<Team>();
+            connection.CreateTable<MatchPlayer>();
             connection.CreateTable<NationFirstName>();
             connection.CreateTable<NationLastName>();
+            connection.CreateTable<SeasonPlayer>();
+            connection.CreateTable<SeasonTeam>();
         }
 
         private void DeleteAllContent()
         {
-            connection.DeleteAll<Nation>();
             connection.DeleteAll<City>();
             connection.DeleteAll<FirstName>();
             connection.DeleteAll<LastName>();
+            connection.DeleteAll<League>();
+            connection.DeleteAll<Match>();
+            connection.DeleteAll<Nation>();
             connection.DeleteAll<NickName>();
+            connection.DeleteAll<Player>();
+            connection.DeleteAll<Season>();
+            connection.DeleteAll<Team>();
+            connection.DeleteAll<MatchPlayer>();
             connection.DeleteAll<NationFirstName>();
             connection.DeleteAll<NationLastName>();
+            connection.DeleteAll<SeasonPlayer>();
+            connection.DeleteAll<SeasonTeam>();
         }
     }
 }

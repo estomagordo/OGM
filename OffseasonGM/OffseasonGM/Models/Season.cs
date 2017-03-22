@@ -20,5 +20,8 @@ namespace OffseasonGM.Models
 
         [ManyToMany(typeof(SeasonPlayer))]
         public List<Player> Players { get; set; }
+
+        [OneToMany]
+        public List<Match> Matches { get; set; }
     }
 }

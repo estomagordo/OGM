@@ -42,8 +42,13 @@
     <Compile Include="Assets\Repositories\FirstNameRepository.cs" />
     <Compile Include="Assets\Repositories\GeneralRepository.cs" />
     <Compile Include="Assets\Repositories\LastNameRepository.cs" />
-    <Compile Include="Assets\Repositories\NationReposistory.cs" />
+    <Compile Include="Assets\Repositories\LeagueRepository.cs" />
+    <Compile Include="Assets\Repositories\MatchRepository.cs" />
+    <Compile Include="Assets\Repositories\NationRepository.cs" />
     <Compile Include="Assets\Repositories\NickNameRepository.cs" />
+    <Compile Include="Assets\Repositories\PlayerRepository.cs" />
+    <Compile Include="Assets\Repositories\SeasonRepository.cs" />
+    <Compile Include="Assets\Repositories\TeamRepository.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
