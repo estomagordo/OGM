@@ -6,6 +6,7 @@ namespace OffseasonGM
 {
     public partial class App : Application
     {        
+        public static GeneralRepository GeneralRepo { get; private set; }
         public static NationReposistory NationRepo { get; private set; }
         public static FirstNameRepository FirstNameRepo { get; private set; }
         public static LastNameRepository LastNameRepo { get; private set; }
@@ -15,12 +16,7 @@ namespace OffseasonGM
         public App(string dbPath)
         {
             InitializeComponent();
-            
-            NationRepo = new NationReposistory(dbPath);
-            FirstNameRepo = new FirstNameRepository(dbPath);
-            LastNameRepo = new LastNameRepository(dbPath);
-            CityRepo = new CityRepository(dbPath);
-            NickNameRepo = new NickNameRepository(dbPath);
+            InitializeRepositories(dbPath);
 
             MainPage = new MainPage();
         }
@@ -38,6 +34,16 @@ namespace OffseasonGM
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        private void InitializeRepositories(string dbPath)
+        {
+            GeneralRepo = new GeneralRepository(dbPath);
+            NationRepo = new NationReposistory(dbPath);
+            FirstNameRepo = new FirstNameRepository(dbPath);
+            LastNameRepo = new LastNameRepository(dbPath);
+            CityRepo = new CityRepository(dbPath);
+            NickNameRepo = new NickNameRepository(dbPath);
         }
     }
 }

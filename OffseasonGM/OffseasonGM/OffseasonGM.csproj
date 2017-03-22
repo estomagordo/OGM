@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="Assets\Repositories\CityRepository.cs" />
     <Compile Include="Assets\Repositories\FirstNameRepository.cs" />
+    <Compile Include="Assets\Repositories\GeneralRepository.cs" />
     <Compile Include="Assets\Repositories\LastNameRepository.cs" />
     <Compile Include="Assets\Repositories\NationReposistory.cs" />
     <Compile Include="Assets\Repositories\NickNameRepository.cs" />

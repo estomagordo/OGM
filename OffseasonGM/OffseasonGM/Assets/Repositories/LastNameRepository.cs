@@ -21,10 +21,8 @@ namespace OffseasonGM.Assets.Repositories
         public LastNameRepository(string dbPath)
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-            nations = connection.GetAllWithChildren<Nation>().ToList();
-
-            connection.CreateTable<LastName>();
-            connection.DeleteAll<LastName>(); // Temporary
+            nations = connection.GetAllWithChildren<Nation>().ToList();            
+            
             var lastNameCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM LastName");
 
             if (lastNameCount == 0)

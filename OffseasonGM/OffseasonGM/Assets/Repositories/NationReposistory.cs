@@ -16,13 +16,8 @@ namespace OffseasonGM.Assets.Repositories
 
         public NationReposistory(string dbPath)
         {
-            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-
-            connection.CreateTable<NationLastName>();
-            connection.CreateTable<NationFirstName>();
-            connection.CreateTable<LastName>();
-            connection.CreateTable<Nation>();
-            connection.DeleteAll<Nation>(); // Temporary
+            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);            
+            
             var nationCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Nation");
 
             if (nationCount == 0)

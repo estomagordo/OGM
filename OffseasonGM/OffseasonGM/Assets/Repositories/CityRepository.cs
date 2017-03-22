@@ -19,10 +19,8 @@ namespace OffseasonGM.Assets.Repositories
 
         public CityRepository(string dbPath)
         {
-            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-
-            connection.CreateTable<City>();
-            connection.DeleteAll<City>(); // Temporary
+            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);            
+            
             var cityCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM City");
 
             if (cityCount == 0)

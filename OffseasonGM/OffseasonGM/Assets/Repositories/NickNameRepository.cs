@@ -19,10 +19,8 @@ namespace OffseasonGM.Assets.Repositories
 
         public NickNameRepository(string dbPath)
         {
-            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-
-            connection.CreateTable<NickName>();
-            connection.DeleteAll<NickName>(); // Temporary
+            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);            
+            
             var nickNameCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM NickName");
 
             if (nickNameCount == 0)

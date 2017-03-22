@@ -20,10 +20,8 @@ namespace OffseasonGM.Assets.Repositories
         public FirstNameRepository(string dbPath)
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-            nations = connection.GetAllWithChildren<Nation>().ToList();
-
-            connection.CreateTable<FirstName>();
-            connection.DeleteAll<FirstName>(); // Temporary
+            nations = connection.GetAllWithChildren<Nation>().ToList();            
+            
             var firstNameCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM FirstName");
 
             if (firstNameCount == 0)
