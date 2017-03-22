@@ -41,6 +41,7 @@
     <Compile Include="Assets\Repositories\CityRepository.cs" />
     <Compile Include="Assets\Repositories\FirstNameRepository.cs" />
     <Compile Include="Assets\Repositories\GeneralRepository.cs" />
+    <Compile Include="Assets\Repositories\GoalRepository.cs" />
     <Compile Include="Assets\Repositories\LastNameRepository.cs" />
     <Compile Include="Assets\Repositories\LeagueRepository.cs" />
     <Compile Include="Assets\Repositories\MatchRepository.cs" />
@@ -54,6 +55,7 @@
     </Compile>
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\FirstName.cs" />
+    <Compile Include="Models\Goal.cs" />
     <Compile Include="Models\LastName.cs" />
     <Compile Include="Models\League.cs" />
     <Compile Include="Models\Match.cs" />

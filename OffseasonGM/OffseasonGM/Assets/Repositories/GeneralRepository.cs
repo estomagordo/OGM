@@ -18,6 +18,7 @@ namespace OffseasonGM.Assets.Repositories
         {
             connection.CreateTable<City>();
             connection.CreateTable<FirstName>();
+            connection.CreateTable<Goal>();
             connection.CreateTable<LastName>();
             connection.CreateTable<League>();
             connection.CreateTable<Match>();
@@ -37,6 +38,7 @@ namespace OffseasonGM.Assets.Repositories
         {
             connection.DeleteAll<City>();
             connection.DeleteAll<FirstName>();
+            connection.DeleteAll<Goal>();
             connection.DeleteAll<LastName>();
             connection.DeleteAll<League>();
             connection.DeleteAll<Match>();

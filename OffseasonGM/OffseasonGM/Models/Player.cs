@@ -27,5 +27,14 @@ namespace OffseasonGM.Models
 
         [ForeignKey(typeof(LastName))]
         public int LastNameId { get; set; }
+
+        [OneToMany("ScorerKey", "Scorer")]
+        public List<Goal> Goals { get; set; }
+
+        [OneToMany("FirstAssistKey", "FirstAssister")]
+        public List<Goal> FirstAssists { get; set; }
+
+        [OneToMany("SecondAssistKey", "SecondAssister")]
+        public List<Goal> SecondAssists { get; set; }
     }
 }

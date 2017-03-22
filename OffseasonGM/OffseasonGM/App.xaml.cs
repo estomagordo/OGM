@@ -9,6 +9,7 @@ namespace OffseasonGM
         public static GeneralRepository GeneralRepo { get; private set; }
 
         public static CityRepository CityRepo { get; private set; }
+        public static GoalRepository GoalRepo { get; private set; }
         public static FirstNameRepository FirstNameRepo { get; private set; }
         public static LastNameRepository LastNameRepo { get; private set; }
         public static LeagueRepository LeagueRepo { get; private set; }
@@ -48,6 +49,7 @@ namespace OffseasonGM
 
             CityRepo = new CityRepository(dbPath);            
             FirstNameRepo = new FirstNameRepository(dbPath);
+            GoalRepo = new GoalRepository(dbPath);
             LastNameRepo = new LastNameRepository(dbPath);
             LeagueRepo = new LeagueRepository(dbPath);
             MatchRepo = new MatchRepository(dbPath);
