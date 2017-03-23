@@ -79,10 +79,12 @@ namespace OffseasonGM.Models
         public double Saving { get; set; }
         public double Shooting { get; set; }
         public double Skating { get; set; }
+
+        public bool Retired { get; set; }
         
         public override string ToString()
         {
             return FirstName.Name + " " + LastName.Name;
-        }
+        }        
     }
 }

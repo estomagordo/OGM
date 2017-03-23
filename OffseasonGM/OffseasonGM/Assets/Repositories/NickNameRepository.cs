@@ -16,6 +16,8 @@ namespace OffseasonGM.Assets.Repositories
     public class NickNameRepository
     {
         SQLiteConnection connection;
+        Random random;
+        List<NickName> nickNames;
 
         public NickNameRepository(string dbPath)
         {
@@ -27,6 +29,8 @@ namespace OffseasonGM.Assets.Repositories
             {
                 SeedNickNames();
             }
+
+            nickNames = GetAllNickNames();
         }
 
         public NickName AddNewNickName(string name)
@@ -46,6 +50,33 @@ namespace OffseasonGM.Assets.Repositories
         public List<NickName> GetAllNickNames()
         {
             return connection.Table<NickName>().ToList();
+        }        
+
+        public List<NickName> GetRandomSelection(int n)
+        {
+            var remaining = nickNames.Count;
+            var selected = new List<NickName>();
+
+            foreach (var nickName in nickNames)
+            {
+                var needed = (double)n / (double)remaining;
+                var result = random.NextDouble();
+
+                if (result <= needed)
+                {
+                    selected.Add(nickName);
+                    n--;
+                }
+
+                remaining--;
+
+                if (n == 0)
+                {
+                    break;
+                }
+            }
+
+            return selected;
         }
 
         private void SeedNickNames()

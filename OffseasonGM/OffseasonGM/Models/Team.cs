@@ -12,8 +12,14 @@ namespace OffseasonGM.Models
         [ForeignKey(typeof(City))]
         public int CityId { get; set; }
 
+        [ManyToOne]
+        public City City { get; set; }
+
         [ForeignKey(typeof(NickName))]
         public int NickNameId { get; set; }
+
+        [ManyToOne]
+        public NickName NickName { get; set; }
 
         [OneToMany]
         public List<Player> Players { get; set; }

@@ -16,10 +16,13 @@ namespace OffseasonGM.Assets.Repositories
     public class CityRepository
     {
         SQLiteConnection connection;
+        Random random;
+        List<City> cities;
 
         public CityRepository(string dbPath)
         {
-            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);      
+            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
+            random = new Random();
             
             var cityCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM City");
 
@@ -27,6 +30,8 @@ namespace OffseasonGM.Assets.Repositories
             {
                 SeedCities();
             }
+
+            cities = GetAllCities();
         }
 
         public City AddNewCity(string name, double latitude, double longitude)
@@ -46,6 +51,33 @@ namespace OffseasonGM.Assets.Repositories
         public List<City> GetAllCities()
         {
             return connection.Table<City>().ToList();
+        }
+
+        public List<City> GetRandomSelection(int n)
+        {
+            var remaining = cities.Count;
+            var selected = new List<City>();
+
+            foreach (var city in cities)
+            {
+                var needed = (double)n / (double)remaining;
+                var result = random.NextDouble();
+
+                if (result <= needed)
+                {
+                    selected.Add(city);
+                    n--;
+                }
+
+                remaining--;
+
+                if (n == 0)
+                {
+                    break;
+                }
+            }
+
+            return selected;
         }
 
         private void SeedCities()
