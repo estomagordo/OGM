@@ -53,8 +53,8 @@ namespace OffseasonGM.Assets.Repositories
         public Player CreatePlayer(int age, Player.PlayerPosition position)
         {
             var nation = nationRepo.GetRandomNation();
-            var firstName = firstNameRepo.GetRandomFirstNameForNation(nation);
-            var lastName = lastNameRepo.GetRandomLastNameForNation(nation);
+            var firstName = firstNameRepo.GetRandomFirstNameForNationName(nation.Name);
+            var lastName = lastNameRepo.GetRandomLastNameForNationName(nation.Name);
 
             var player = new Player() { NatonId = nation.Id, FirstNameId = firstName.Id, LastNameId = lastName.Id, Age = age };
 

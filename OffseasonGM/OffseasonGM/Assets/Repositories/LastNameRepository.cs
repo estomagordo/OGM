@@ -15,7 +15,7 @@ namespace OffseasonGM.Assets.Repositories
 {
     public class LastNameRepository
     {
-        private Dictionary<Nation, List<LastName>> _lastNamesPerNation;        
+        private Dictionary<string, List<LastName>> _lastNamesPerNationName;        
         private List<LastName> _lastNames;
 
         SQLiteConnection connection;
@@ -34,34 +34,34 @@ namespace OffseasonGM.Assets.Repositories
             }
         }
 
-        Dictionary<Nation, List<LastName>> LastNamesPerNation
+        Dictionary<string, List<LastName>> LastNamesPerNationName
         {
             get
             {
-                if (_lastNamesPerNation == null)
+                if (_lastNamesPerNationName == null)
                 {
-                    var dictionary = new Dictionary<Nation, List<LastName>>();
+                    var dictionary = new Dictionary<string, List<LastName>>();
 
                     foreach (var nation in nations)
                     {
-                        dictionary[nation] = new List<LastName>();
+                        dictionary[nation.Name] = new List<LastName>();
                     }
                     foreach (var lastName in LastNames)
                     {
                         foreach (var nation in lastName.Nations)
                         {
-                            dictionary[nation].Add(lastName);
+                            dictionary[nation.Name].Add(lastName);
                         }
                     }
 
-                    _lastNamesPerNation = dictionary;
+                    _lastNamesPerNationName = dictionary;
                 }
 
-                return _lastNamesPerNation;
+                return _lastNamesPerNationName;
             }
             set
             {
-                _lastNamesPerNation = value;
+                _lastNamesPerNationName = value;
             }
         }
 
@@ -98,14 +98,14 @@ namespace OffseasonGM.Assets.Repositories
             return LastNames;
         }
 
-        public List<LastName> GetAllLastNamesForNation(Nation nation)
+        public List<LastName> GetAllLastNamesForNationName(string nationName)
         {
-            return LastNamesPerNation[nation];
+            return LastNamesPerNationName[nationName];
         }
 
-        public LastName GetRandomLastNameForNation(Nation nation)
+        public LastName GetRandomLastNameForNationName(string nationName)
         {
-            var nameList = LastNamesPerNation[nation];
+            var nameList = LastNamesPerNationName[nationName];
             return nameList[random.Next(nameList.Count)];
         }
 

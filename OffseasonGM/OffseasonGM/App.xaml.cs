@@ -1,5 +1,6 @@
 ﻿using OffseasonGM.Assets.Repositories;
-
+using OffseasonGM.Models;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace OffseasonGM
@@ -47,14 +48,14 @@ namespace OffseasonGM
         {
             GeneralRepo = new GeneralRepository(dbPath);
 
-            CityRepo = new CityRepository(dbPath);            
+            NationRepo = new NationRepository(dbPath);
+            NickNameRepo = new NickNameRepository(dbPath);
+            CityRepo = new CityRepository(dbPath);    
             FirstNameRepo = new FirstNameRepository(dbPath);
             GoalRepo = new GoalRepository(dbPath);
             LastNameRepo = new LastNameRepository(dbPath);
             LeagueRepo = new LeagueRepository(dbPath);
-            MatchRepo = new MatchRepository(dbPath);
-            NationRepo = new NationRepository(dbPath);
-            NickNameRepo = new NickNameRepository(dbPath);
+            MatchRepo = new MatchRepository(dbPath);            
             PlayerRepo = new PlayerRepository(dbPath);
             SeasonRepo = new SeasonRepository(dbPath);
             TeamRepo = new TeamRepository(dbPath);
