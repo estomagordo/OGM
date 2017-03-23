@@ -158,7 +158,7 @@ namespace OffseasonGM.Assets.Repositories
                 player.Retired = true;
             }
 
-            connection.UpdateWithChildren(player);
+            connection.Update(player);
         }
 
         private Player InsertPlayer(int firstNameId, int lastNameId)

@@ -26,6 +26,8 @@ namespace OffseasonGM
             InitializeComponent();
             InitializeRepositories(dbPath);
 
+            var teams = TeamRepo.CreateTeams(30);
+
             MainPage = new MainPage();
         }
 

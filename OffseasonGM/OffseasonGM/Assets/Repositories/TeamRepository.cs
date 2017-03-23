@@ -29,7 +29,10 @@ namespace OffseasonGM.Assets.Repositories
             var cities = cityRepo.GetRandomSelection(n);
             var nickNames = nickNameRepo.GetRandomSelection(n);
 
-            return Enumerable.Range(0, n).Select(num => CreateNewTeam(cities[n], nickNames[n])).ToList();
+            ShuffleList(cities);
+            ShuffleList(nickNames);
+
+            return Enumerable.Range(0, n).Select(num => CreateNewTeam(cities[num], nickNames[num])).ToList();
         }
 
         private Team CreateNewTeam(City city, NickName nickName)
@@ -94,6 +97,21 @@ namespace OffseasonGM.Assets.Repositories
             {
                 return null;
             }
+        }
+
+        private void ShuffleList<T>(List<T> list)
+        {
+            for (var i = 0; i < list.Count; i++)
+            {
+                Swap(list, i, random.Next(i, list.Count));
+            }
+        }
+
+        private void Swap<T>(List<T> list, int i, int j)
+        {
+            var temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
         }
 
         public List<Team> GetAllTeams()

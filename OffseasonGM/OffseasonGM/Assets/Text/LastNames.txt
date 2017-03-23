@@ -21,6 +21,7 @@ Grigorov|Russia
 Hirohito|Japan
 Honda|Japan
 Ito|Japan
+Jepsen|Denmark
 Järvinen|Finland|Sweden
 Klimt|Sweden|Germany|Austria
 Kobayashi|Japan|USA
@@ -44,6 +45,7 @@ Nedved|Czechia|Slovakia
 Niemi|Finland
 Ohlsson|Sweden
 Olausson|Sweden
+Olsen|Denmark
 Olsson|Sweden
 Pascal|France|Canada|Switzerland
 Pavlov|USA|Russia
@@ -58,6 +60,7 @@ Rosso|Italy
 Rybak|Norway|Belarus
 Saitsev|Russia
 Salenko|Russia
+Schiller|Denmark|Germany|Austria
 Stalin|Russia
 Sturridge|Canada|USA
 Suzuki|Japan
