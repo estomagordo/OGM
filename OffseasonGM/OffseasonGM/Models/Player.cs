@@ -10,8 +10,20 @@ namespace OffseasonGM.Models
 {
     public class Player
     {
+        public enum PlayerPosition
+        {
+            Goalie,
+            Defenseman,
+            Center,
+            LeftWing,
+            RightWing
+        }
+
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+
+        [ForeignKey(typeof(Nation))]
+        public int NatonId { get; set; }
 
         [ForeignKey(typeof(Team))]
         public int TeamId { get; set; }
@@ -36,5 +48,25 @@ namespace OffseasonGM.Models
 
         [OneToMany("SecondAssistKey", "SecondAssister")]
         public List<Goal> SecondAssists { get; set; }
+
+        public PlayerPosition Position { get; set; }
+
+        public int Age { get; set; }
+        public int PeakAge { get; set; }
+        public int RetireAge { get; set; }
+
+        public double ImproveSpeed { get; set; }
+        public double DeclineSpeed { get; set; }
+
+        public double Defense { get; set; }
+        public double Endurance { get; set; }
+        public double Fitness { get; set; }
+        public double Passing { get; set; }
+        public double PuckControl { get; set; }
+        public double ReboundControl { get; set; }
+        public double Saving { get; set; }
+        public double Shooting { get; set; }
+        public double Skating { get; set; }                
+        
     }
 }

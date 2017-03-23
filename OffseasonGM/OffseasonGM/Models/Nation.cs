@@ -21,5 +21,8 @@ namespace OffseasonGM.Models
 
         [ManyToMany(typeof(NationLastName))]
         public List<LastName> LastNames { get; set; }
+
+        [OneToMany]
+        public List<Player> Players { get; set; }
     }
 }

@@ -13,17 +13,22 @@ namespace OffseasonGM.Assets.Repositories
     public class NationRepository
     {
         SQLiteConnection connection;
+        Random random;
+        List<Nation> nations;
 
         public NationRepository(string dbPath)
         {
-            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);            
-            
+            connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
+            random = new Random();
+
             var nationCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Nation");
 
             if (nationCount == 0)
             {
                 SeedNations();
-            }            
+            }
+
+            nations = GetAllNations();
         }
 
         public void AddNewNation(string name, string adjective, double frequency)
@@ -41,6 +46,22 @@ namespace OffseasonGM.Assets.Repositories
         public List<Nation> GetAllNations()
         {
             return connection.GetAllWithChildren<Nation>().ToList();
+        }
+
+        public Nation GetRandomNation()
+        {
+            var number = random.NextDouble();
+            var accumulated = 0.0;
+            foreach (var nation in nations)
+            {
+                accumulated += nation.Frequency;
+                if (accumulated >= number)
+                {
+                    return nation;
+                }
+            }
+
+            return nations.Last();
         }
 
         private void SeedNations()

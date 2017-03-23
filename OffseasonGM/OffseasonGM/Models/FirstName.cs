@@ -13,6 +13,6 @@ namespace OffseasonGM.Models
         public string Name { get; set; }
 
         [ManyToMany(typeof(NationFirstName))]
-        public List<Nation> Nations { get; set; }
+        public List<Nation> Nations { get; set; }       
     }
 }
