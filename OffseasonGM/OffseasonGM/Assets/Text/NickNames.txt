@@ -6,10 +6,12 @@ Boulders
 Caged
 Chaos
 Clinchers
+Clowns
 Conjurers
 Cougars
 Creepers
 Crushers
+Desperados
 Disorder
 Elementals
 Endless Pits
@@ -23,6 +25,7 @@ Hermits
 Huggers
 Hyenas
 Hyperdrive
+Ionized
 Juice
 Lackeys
 Lemmas
@@ -44,7 +47,9 @@ Pristine
 Pugilists
 Purple Swift
 Rainbows
+Razed
 Rough Riders
+Rumble
 Run n' Gunners
 Scimitars
 Scoundrels
@@ -57,7 +62,9 @@ Stonemen
 Tanned
 Tomfoolery
 Uppercuts
+Vengeance
 Voyagers
+Warlords
 Wondrous
 Wormholes
 Xenophobiacs

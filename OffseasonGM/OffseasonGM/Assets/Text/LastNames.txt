@@ -3,6 +3,7 @@ Augustsson|Sweden
 Bale|Canada|USA
 Bendulic|Slovenia
 Blanc|Canada|France
+Bokun|Belarus
 Bondarenko|Ukraine
 Boniek|Poland
 Caseraghi|Italy
@@ -11,6 +12,7 @@ Danilovic|Slovenia
 Davydenko|Russia
 Davydov|Russia
 Denisov|Russia
+Doroshevic|Belarus
 Ford|Canada|USA
 Gerber|Germany|Austria|Switzerland
 Grönlund|Finland|Sweden
@@ -29,6 +31,7 @@ Krustofski|Poland
 Larson|Canada|USA
 Larsson|Sweden
 LeMarc|Sweden|Canada|France|Switzerland
+Litvinchuk|Belarus
 Müller|Germany|Switzerland|Austria|Sweden
 Martinovic|Slovenia
 Martins|Latvia
@@ -52,6 +55,7 @@ Rautio|Finland|Sweden
 Rogers|Canada|USA
 Rossi|Italy
 Rosso|Italy
+Rybak|Norway|Belarus
 Saitsev|Russia
 Salenko|Russia
 Stalin|Russia
@@ -60,3 +64,4 @@ Suzuki|Japan
 Terry|Canada|USA
 Thomson|Canada|USA
 Titov|Russia|Ukraine
+Yurevich|Belarus|Russia|Ukraine
