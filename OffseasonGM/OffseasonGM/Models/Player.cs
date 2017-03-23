@@ -23,10 +23,16 @@ namespace OffseasonGM.Models
         public int Id { get; set; }
 
         [ForeignKey(typeof(Nation))]
-        public int NatonId { get; set; }
+        public int NationId { get; set; }
+
+        [ManyToOne]
+        public Nation Nation { get; set; }
 
         [ForeignKey(typeof(Team))]
         public int TeamId { get; set; }
+
+        [ManyToOne]
+        public Team Team { get; set; }
 
         [ManyToMany(typeof(SeasonPlayer))]
         public List<Season> Seasons { get; set; }
@@ -37,8 +43,14 @@ namespace OffseasonGM.Models
         [ForeignKey(typeof(FirstName))]
         public int FirstNameId { get; set; }
 
+        [ManyToOne]
+        public FirstName FirstName { get; set; }
+
         [ForeignKey(typeof(LastName))]
         public int LastNameId { get; set; }
+        
+        [ManyToOne]
+        public LastName LastName { get; set; }
 
         [OneToMany("ScorerKey", "Scorer")]
         public List<Goal> Goals { get; set; }
@@ -66,7 +78,11 @@ namespace OffseasonGM.Models
         public double ReboundControl { get; set; }
         public double Saving { get; set; }
         public double Shooting { get; set; }
-        public double Skating { get; set; }                
+        public double Skating { get; set; }
         
+        public override string ToString()
+        {
+            return FirstName.Name + " " + LastName.Name;
+        }
     }
 }
