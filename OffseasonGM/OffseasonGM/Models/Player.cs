@@ -81,6 +81,25 @@ namespace OffseasonGM.Models
         public double Skating { get; set; }
 
         public bool Retired { get; set; }
+
+        [Ignore]
+        public double Overall
+        {
+            get
+            {
+                switch (Position)
+                {
+                    case PlayerPosition.Goalie:
+                        return Saving + ReboundControl + Endurance * 0.5 / 2.5;
+                    case PlayerPosition.Defenseman:
+                        return Defense + Skating + Shooting * 0.5 + Endurance * 0.5 + Passing * 0.5 + PuckControl * 0.5 / 4.0;
+                    case PlayerPosition.Center:
+                        return Passing + Shooting + PuckControl + Skating * 0.75 + Defense * 0.5 + Endurance * 0.5 / 4.75;
+                    default:
+                        return Skating + Shooting + Passing + PuckControl * 0.75 + Defense * 0.5 + Endurance * 0.5 / 4.75;
+                }
+            }
+        }
         
         public override string ToString()
         {

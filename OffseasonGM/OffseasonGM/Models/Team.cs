@@ -1,6 +1,7 @@
 ﻿using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OffseasonGM.Models
 {
@@ -32,5 +33,25 @@ namespace OffseasonGM.Models
 
         [OneToMany("AwayTeamKey", "AwayTeam")]
         public List<Match> AwayGames { get; set; }
+
+        [Ignore]
+        public List<Player> GoalieOrdering { get; set; }
+        [Ignore]
+        public List<Player> DefenseManOrdering { get; set; }
+        [Ignore]
+        public List<Player> CenterOrdering { get; set; }
+        [Ignore]
+        public List<Player> LeftWingOrdering { get; set; }
+        [Ignore]
+        public List<Player> RightWingOrdering { get; set; }
+
+        public void ArrangeBestTeam()
+        {
+            GoalieOrdering = Players.Where(player => player.Position == Player.PlayerPosition.Goalie).OrderByDescending(player => player.Overall).ToList();
+            DefenseManOrdering = Players.Where(player => player.Position == Player.PlayerPosition.Defenseman).OrderByDescending(player => player.Overall).ToList();
+            CenterOrdering = Players.Where(player => player.Position == Player.PlayerPosition.Center).OrderByDescending(player => player.Overall).ToList();
+            LeftWingOrdering = Players.Where(player => player.Position == Player.PlayerPosition.LeftWing).OrderByDescending(player => player.Overall).ToList();
+            RightWingOrdering = Players.Where(player => player.Position == Player.PlayerPosition.RightWing).OrderByDescending(player => player.Overall).ToList();
+        }
     }
 }
