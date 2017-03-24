@@ -28,15 +28,22 @@ namespace OffseasonGM.Models
         [ManyToOne]
         public Team Team { get; set; }
 
+        public int Period { get; set; }
+
+        public int Seconds { get; set; }
+
         public Goal()
         {
 
         }
 
-        public Goal(Team team, Player scorer, List<Player> assisters)
+        public Goal(Team team, int period, int seconds, Player scorer, List<Player> assisters)
         {
-            Team = team;
+            Team = team;            
+            Period = period;
+            Seconds = seconds;
             Scorer = scorer;
+
             if (assisters.Count > 0)
             {
                 FirstAssister = assisters.First();

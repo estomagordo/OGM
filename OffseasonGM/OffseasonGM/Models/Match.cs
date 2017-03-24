@@ -59,11 +59,11 @@ namespace OffseasonGM.Models
 
             for (var i = 0; i < 3; i++)
             {
-                PlayPeriod();
+                PlayPeriod(i+1);
             }
         }
 
-        private void PlayPeriod()
+        private void PlayPeriod(int periodNumber)
         {
             var homePair = 0;
             var homeLine = 0;
@@ -137,7 +137,11 @@ namespace OffseasonGM.Models
                                                      homeAttacks ? homePair : awayPair,
                                                      homeAttacks ? homeLine : awayLine);
 
-                        var goal = new Goal(homeAttacks ? HomeTeam :AwayTeam, shooter, assisters);
+                        var goal = new Goal(homeAttacks ? HomeTeam :AwayTeam,
+                                            periodNumber,
+                                            me.second,
+                                            shooter,
+                                            assisters);
                         Goals.Add(goal);
 
                         break;
