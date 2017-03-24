@@ -22,6 +22,15 @@ namespace OffseasonGM.Models
         [ManyToOne]
         public NickName NickName { get; set; }
 
+        public double FirstGoalieShare { get; set; }
+        public int FirstPairTime { get; set; }
+        public int SecondPairTime { get; set; }
+        public int ThirdPairTime { get; set; }
+        public int FirstLineTime { get; set; }
+        public int SecondLineTime { get; set; }
+        public int ThirdLineTime { get; set; }
+        public int FourthLineTime { get; set; }        
+
         [OneToMany]
         public List<Player> Players { get; set; }
 
@@ -44,6 +53,22 @@ namespace OffseasonGM.Models
         public List<Player> LeftWingOrdering { get; set; }
         [Ignore]
         public List<Player> RightWingOrdering { get; set; }
+
+        public List<int> DefenseShiftTimes
+        {
+            get
+            {
+                return new List<int> { FirstPairTime, SecondPairTime, ThirdPairTime };
+            }
+        }
+
+        public List<int> OffenseShiftTimes
+        {
+            get
+            {
+                return new List<int> { FirstLineTime, SecondLineTime, ThirdLineTime, FourthLineTime };
+            }
+        }
 
         public void ArrangeBestTeam()
         {

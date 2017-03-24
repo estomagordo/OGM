@@ -24,5 +24,27 @@ namespace OffseasonGM.Models
 
         [ManyToOne("SecondAssistKey", "SecondAssists")]
         public Player SecondAssister { get; set; }
+
+        [ManyToOne]
+        public Team Team { get; set; }
+
+        public Goal()
+        {
+
+        }
+
+        public Goal(Team team, Player scorer, List<Player> assisters)
+        {
+            Team = team;
+            Scorer = scorer;
+            if (assisters.Count > 0)
+            {
+                FirstAssister = assisters.First();
+            }
+            if (assisters.Count == 2)
+            {
+                SecondAssister = assisters.Last();
+            }
+        }
     }
 }
