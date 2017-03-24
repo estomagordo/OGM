@@ -78,5 +78,10 @@ namespace OffseasonGM.Models
             LeftWingOrdering = Players.Where(player => player.Position == Player.PlayerPosition.LeftWing).OrderByDescending(player => player.Overall).ToList();
             RightWingOrdering = Players.Where(player => player.Position == Player.PlayerPosition.RightWing).OrderByDescending(player => player.Overall).ToList();
         }
+
+        public override string ToString()
+        {
+            return City.Name + " " + NickName.Name;
+        }
     }
 }

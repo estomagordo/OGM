@@ -282,5 +282,10 @@ namespace OffseasonGM.Models
                 eventList.Add((second, matchEvent));                
             }
         }
+
+        public override string ToString()
+        {
+            return HomeTeam + " (" + Goals.Where(goal => goal.Team == HomeTeam).ToString() + ") " + AwayTeam + " (" + Goals.Where(goal => goal.Team == AwayTeam).ToString() + ")";
+        }
     }
 }
