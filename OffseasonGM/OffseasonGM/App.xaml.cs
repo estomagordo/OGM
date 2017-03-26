@@ -28,6 +28,20 @@ namespace OffseasonGM
 
             var teams = TeamRepo.CreateTeams(30);
 
+            for (var home = 0; home < 30; home++)
+            {
+                for (var away = 0; away < 30; away++)
+                {
+                    if (home == away)
+                    {
+                        continue;
+                    }
+
+                    var match = new Match() { HomeTeam = teams[home], AwayTeam = teams[away] };
+                    match.PlayGame();
+                }
+            }
+
             MainPage = new MainPage();
         }
 

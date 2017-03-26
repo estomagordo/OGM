@@ -52,6 +52,12 @@ namespace OffseasonGM.Models
         public int HomeShots { get; set; }
         public int AwayShots { get; set; }
 
+        public Match()
+        {
+            random = new Random();
+            Goals = new List<Goal>();
+        }
+
         public void PlayGame()
         {
             homeGoalie = HomeTeam.GoalieOrdering[random.NextDouble() <= HomeTeam.FirstGoalieShare ? 0 : 1];
@@ -61,6 +67,9 @@ namespace OffseasonGM.Models
             {
                 PlayPeriod(i+1);
             }
+
+            HomeTeam.HomeGames.Add(this);
+            AwayTeam.AwayGames.Add(this);
         }
 
         private void PlayPeriod(int periodNumber)

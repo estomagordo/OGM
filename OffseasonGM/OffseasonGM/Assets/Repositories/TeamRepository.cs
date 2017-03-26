@@ -96,6 +96,8 @@ namespace OffseasonGM.Assets.Repositories
                 connection.Update(player);
             }
 
+            team.ArrangeBestTeam();
+
             try
             {
                 connection.Insert(team);
