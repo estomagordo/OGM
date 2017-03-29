@@ -37,10 +37,10 @@ namespace OffseasonGM.Models
         [ManyToMany(typeof(SeasonTeam))]
         public List<Season> Seasons { get; set; }
 
-        [OneToMany("HomeTeamKey", "HomeTeam")]
+        [OneToMany("HomeTeamKey", "HomeTeam"), ForeignKey(typeof(Match))]
         public List<Match> HomeGames { get; set; }
 
-        [OneToMany("AwayTeamKey", "AwayTeam")]
+        [OneToMany("AwayTeamKey", "AwayTeam"), ForeignKey(typeof(Match))]
         public List<Match> AwayGames { get; set; }
 
         [Ignore]

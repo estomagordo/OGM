@@ -1,6 +1,7 @@
 ﻿using OffseasonGM.Assets.Repositories;
 using OffseasonGM.Models;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace OffseasonGM
@@ -42,7 +43,7 @@ namespace OffseasonGM
                 }
             }
 
-            MainPage = new MainPage();
+            MainPage = new TeamsPage(dbPath, teams.First().Id);
         }
 
         protected override void OnStart()

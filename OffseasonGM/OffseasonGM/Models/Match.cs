@@ -40,6 +40,12 @@ namespace OffseasonGM.Models
         [OneToMany]
         public List<Goal> Goals { get; set; }
 
+        [ForeignKey(typeof(Team))]
+        public int HomeTeamKey { get; set; }
+
+        [ForeignKey(typeof(Team))]
+        public int AwayTeamKey { get; set; }
+
         [ManyToOne("HomeTeamKey", "HomeGames")]
         public Team HomeTeam { get; set; }
 
