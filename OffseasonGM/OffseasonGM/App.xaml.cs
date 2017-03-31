@@ -1,5 +1,6 @@
 ﻿using OffseasonGM.Assets.Repositories;
 using OffseasonGM.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
@@ -22,18 +23,24 @@ namespace OffseasonGM
         public static SeasonRepository SeasonRepo { get; private set; }
         public static TeamRepository TeamRepo { get; private set; }
 
+        private Random random;
+
         public App(string dbPath)
         {
+            random = new Random();
+
             InitializeComponent();
             InitializeRepositories(dbPath);
 
-            var teams = TeamRepo.CreateTeams(30);
-            var season = SeasonRepo.AddNewSeason(2016);
+            var teams = CreateTeams(30);
+            var season = new Season(2016);
             
             foreach (var team in teams)
             {
                 season.Teams.Add(team);
                 team.Seasons.Add(season);
+                AddPlayersToNewTeam(team);
+                team.ArrangeBestTeam();
             }
 
             for (var home = 0; home < 30; home++)
@@ -45,27 +52,13 @@ namespace OffseasonGM
                         continue;
                     }
 
-                    var match = MatchRepo.AddNewMatch(season.Id, teams[home], teams[away]);
-                    match.PlayGame();                    
-
-                    foreach (var goal in match.Goals)
-                    {
-                        GoalRepo.AddNewGoal(goal);
-                    }
-
-                    MatchRepo.UpdateMatch(match);
+                    var match = new Match(season.Id, teams[home], teams[away]);
+                    match.PlayGame(random);
                     season.Matches.Add(match);
                 }
             }
 
-            foreach (var team in teams)
-            {
-                TeamRepo.UpdateTeam(team);
-            }
-
-            SeasonRepo.UpdateSeason(season);
-
-            MainPage = new TeamsPage(dbPath, teams.First().Id);
+            MainPage = new TeamsPage(teams);
         }
 
         protected override void OnStart()
@@ -98,6 +91,73 @@ namespace OffseasonGM
             PlayerRepo = new PlayerRepository(dbPath);
             SeasonRepo = new SeasonRepository(dbPath);
             TeamRepo = new TeamRepository(dbPath);
+        }
+
+        private List<Team> CreateTeams(int n)
+        {
+            var cities = CityRepo.GetRandomSelection(n);
+            var nickNames = NickNameRepo.GetRandomSelection(n);
+
+            ShuffleList(cities);
+            ShuffleList(nickNames);
+
+            return Enumerable.Range(0, n).Select(num => new Team(cities[num], nickNames[num])).ToList();
+        }
+
+        private void AddPlayersToNewTeam(Team team)
+        {
+            for (var i = 0; i < 3; i++)
+            {
+                var goalie = PlayerRepo.CreatePlayer(18, Player.PlayerPosition.Goalie);
+                team.Players.Add(goalie);
+            }
+            for (var i = 0; i < 8; i++)
+            {
+                var defenseman = PlayerRepo.CreatePlayer(18, Player.PlayerPosition.Defenseman);
+                team.Players.Add(defenseman);
+            }
+            for (var i = 0; i < 5; i++)
+            {
+                var center = PlayerRepo.CreatePlayer(18, Player.PlayerPosition.Center);
+                team.Players.Add(center);
+            }
+            for (var i = 0; i < 5; i++)
+            {
+                var leftWing = PlayerRepo.CreatePlayer(18, Player.PlayerPosition.LeftWing);
+                team.Players.Add(leftWing);
+            }
+            for (var i = 0; i < 5; i++)
+            {
+                var rightWing = PlayerRepo.CreatePlayer(18, Player.PlayerPosition.RightWing);
+                team.Players.Add(rightWing);
+            }
+
+            foreach (var player in team.Players)
+            {
+                var birthDays = random.Next(13);
+                for (var i = 0; i < birthDays; i++)
+                {
+                    player.HaveBirthday(random);
+                }
+
+                player.Team = team;
+                player.TeamId = team.Id;
+            }
+        }
+
+        private void ShuffleList<T>(List<T> list)
+        {
+            for (var i = 0; i < list.Count; i++)
+            {
+                Swap(list, i, random.Next(i, list.Count));
+            }
+        }
+
+        private void Swap<T>(List<T> list, int i, int j)
+        {
+            var temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
         }
     }
 }

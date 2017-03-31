@@ -100,7 +100,31 @@ namespace OffseasonGM.Models
                 }
             }
         }
-        
+
+        public void HaveBirthday(Random random)
+        {
+            var baseChangeFactor = Age >= PeakAge
+                ? DeclineSpeed
+                : ImproveSpeed;
+
+            Age++;
+
+            Defense += baseChangeFactor * random.NextDouble() * 2.0;
+            Endurance += baseChangeFactor * random.NextDouble() * 2.0;
+            Fitness += baseChangeFactor * random.NextDouble() * 2.0;
+            Passing += baseChangeFactor * random.NextDouble() * 2.0;
+            PuckControl += baseChangeFactor * random.NextDouble() * 2.0;
+            ReboundControl += baseChangeFactor * random.NextDouble() * 2.0;
+            Saving += baseChangeFactor * random.NextDouble() * 2.0;
+            Shooting += baseChangeFactor * random.NextDouble() * 2.0;
+            Skating += baseChangeFactor * random.NextDouble() * 2.0;
+
+            if (Age == RetireAge)
+            {
+                Retired = true;
+            }
+        }
+
         public override string ToString()
         {
             return FirstName.Name + " " + LastName.Name;

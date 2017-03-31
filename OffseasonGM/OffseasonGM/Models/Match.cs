@@ -76,12 +76,22 @@ namespace OffseasonGM.Models
 
         public Match()
         {
-            random = new Random();
             Goals = new List<Goal>();
         }
 
-        public void PlayGame()
+        public Match(int seasonId, Team home, Team away)
         {
+            Goals = new List<Goal>();
+            Players = home.Players.Concat(away.Players).ToList();
+            SeasonId = seasonId;
+            HomeTeam = home;
+            AwayTeam = away;
+        }
+
+        public void PlayGame(Random random)
+        {
+            this.random = random;
+
             homeGoalie = HomeTeam.GoalieOrdering[random.NextDouble() <= HomeTeam.FirstGoalieShare ? 0 : 1];
             awayGoalie = AwayTeam.GoalieOrdering[random.NextDouble() <= AwayTeam.FirstGoalieShare ? 0 : 1];
 
@@ -175,7 +185,6 @@ namespace OffseasonGM.Models
                                             assisters);
 
                         Goals.Add(goal);
-
 
                         break;
                 }

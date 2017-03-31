@@ -142,6 +142,26 @@ namespace OffseasonGM.Models
             {
                 return new List<int> { FirstLineTime, SecondLineTime, ThirdLineTime, FourthLineTime };
             }
+        }        
+
+        public Team (City city, NickName nickName)
+        {
+            City = city;
+            CityId = city.Id;
+            NickName = nickName;
+            NickNameId = nickName.Id;
+            FirstGoalieShare = 0.75;
+            FirstPairTime = 50;
+            SecondPairTime = 45;
+            ThirdPairTime = 35;
+            FirstLineTime = 40;
+            SecondLineTime = 35;
+            ThirdLineTime = 30;
+            FourthLineTime = 20;
+            Players = new List<Player>();
+            Seasons = new List<Season>();
+            HomeGames = new List<Match>();
+            AwayGames = new List<Match>();
         }
 
         public void ArrangeBestTeam()

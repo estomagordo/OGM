@@ -18,8 +18,7 @@ namespace OffseasonGM
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TeamsPage : ContentPage
     {
-        private int _currentTeamIndex;        
-        private TeamRepository teamRepo;
+        private int _currentTeamIndex;
         private List<Team> teams;
 
         private int currentTeamIndex
@@ -43,14 +42,11 @@ namespace OffseasonGM
             }
         }
 
-        public TeamsPage(string dbPath, int teamId)
+        public TeamsPage(List<Team> teams)
         {
-            teamRepo = new TeamRepository(dbPath);
-            teams = teamRepo.GetAllTeams();            
-
+            this.teams = teams;
             InitializeComponent();
-
-            currentTeamIndex = teams.FindIndex(team => team.Id == teamId);
+            currentTeamIndex = 0;
         }
 
         private void RefreshView()

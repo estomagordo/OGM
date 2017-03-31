@@ -23,5 +23,13 @@ namespace OffseasonGM.Models
 
         [OneToMany]
         public List<Match> Matches { get; set; }
+
+        public Season(int startYear)
+        {            
+            StartYear = startYear;
+            Matches = new List<Match>();
+            Players = new List<Player>();
+            Teams = new List<Team>();
+        }
     }
 }

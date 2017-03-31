@@ -133,33 +133,7 @@ namespace OffseasonGM.Assets.Repositories
                 _stableStatMean * random.NextGaussian());
 
             return InsertPlayer(player);
-        }
-
-        public void AgePlayer(Player player)
-        {
-            var baseChangeFactor = player.Age >= player.PeakAge
-                ? player.DeclineSpeed
-                : player.ImproveSpeed;
-
-            player.Age++;
-
-            player.Defense += baseChangeFactor * random.NextDouble() * 2.0;
-            player.Endurance += baseChangeFactor * random.NextDouble() * 2.0;
-            player.Fitness += baseChangeFactor * random.NextDouble() * 2.0;
-            player.Passing += baseChangeFactor * random.NextDouble() * 2.0;
-            player.PuckControl += baseChangeFactor * random.NextDouble() * 2.0;
-            player.ReboundControl += baseChangeFactor * random.NextDouble() * 2.0;
-            player.Saving += baseChangeFactor * random.NextDouble() * 2.0;
-            player.Shooting += baseChangeFactor * random.NextDouble() * 2.0;
-            player.Skating += baseChangeFactor * random.NextDouble() * 2.0;
-
-            if (player.Age == player.RetireAge)
-            {
-                player.Retired = true;
-            }
-
-            connection.Update(player);
-        }
+        }        
 
         private Player InsertPlayer(int firstNameId, int lastNameId)
         {
