@@ -40,6 +40,19 @@ namespace OffseasonGM.Assets.Repositories
             }
         }
 
+        public Goal AddNewGoal(Goal goal)
+        {
+            try
+            {
+                connection.InsertWithChildren(goal);
+                return goal;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public List<Goal> GetAllGoals()
         {
             return connection.GetAllWithChildren<Goal>();

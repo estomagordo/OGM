@@ -22,13 +22,18 @@ namespace OffseasonGM.Assets.Repositories
             {
                 var players = home.Players.Concat(away.Players).ToList();
                 var match = new Match() { SeasonId = seasonId, HomeTeam = home, AwayTeam = away, Players = players };
-                connection.Insert(match);
+                connection.InsertWithChildren(match);
                 return match;
             }
             catch (Exception ex)
             {
                 return null;
             }
+        }
+
+        public void UpdateMatch(Match match)
+        {
+            connection.UpdateWithChildren(match);
         }
 
         public List<Match> GetAllMatches()

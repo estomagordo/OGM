@@ -57,6 +57,22 @@ namespace OffseasonGM.Models
 
         public int HomeShots { get; set; }
         public int AwayShots { get; set; }
+        [Ignore]
+        public int HomeGoalCount
+        {
+            get
+            {
+                return Goals.Count(goal => goal.Team == HomeTeam);
+            }
+        }
+        [Ignore]
+        public int AwayGoalCount
+        {
+            get
+            {
+                return Goals.Count(goal => goal.Team == AwayTeam);
+            }
+        }
 
         public Match()
         {
@@ -157,7 +173,9 @@ namespace OffseasonGM.Models
                                             me.second,
                                             shooter,
                                             assisters);
+
                         Goals.Add(goal);
+
 
                         break;
                 }

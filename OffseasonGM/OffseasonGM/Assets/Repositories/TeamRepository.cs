@@ -35,6 +35,16 @@ namespace OffseasonGM.Assets.Repositories
             return Enumerable.Range(0, n).Select(num => CreateNewTeam(cities[num], nickNames[num])).ToList();
         }
 
+        public void UpdateTeam(Team team)
+        {
+            connection.UpdateWithChildren(team);
+        }
+
+        public List<Team> GetAllTeams()
+        {
+            return connection.GetAllWithChildren<Team>();
+        }
+
         private Team CreateNewTeam(City city, NickName nickName)
         {
             var team = new Team()
@@ -122,11 +132,6 @@ namespace OffseasonGM.Assets.Repositories
             var temp = list[i];
             list[i] = list[j];
             list[j] = temp;
-        }
-
-        public List<Team> GetAllTeams()
-        {
-            return connection.GetAllWithChildren<Team>();
-        }
+        }        
     }
 }

@@ -29,6 +29,11 @@ namespace OffseasonGM.Assets.Repositories
             }
         }
 
+        public void UpdateSeason(Season season)
+        {
+            connection.UpdateWithChildren(season);
+        }
+
         public List<Season> GetAllSeasons()
         {
             return connection.GetAllWithChildren<Season>();

@@ -56,6 +56,7 @@ namespace OffseasonGM
         private void RefreshView()
         {
             LongTeamNameLabel.Text = CurrentTeam.ToString();
+            TeamRecordLabel.Text = CurrentTeam.FormatedSeasonRecord;
         }
 
         private void CycleBackward(object sender, EventArgs e)

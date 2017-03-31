@@ -10,9 +10,9 @@ namespace OffseasonGM
     {        
         public static GeneralRepository GeneralRepo { get; private set; }
 
-        public static CityRepository CityRepo { get; private set; }
-        public static GoalRepository GoalRepo { get; private set; }
+        public static CityRepository CityRepo { get; private set; }        
         public static FirstNameRepository FirstNameRepo { get; private set; }
+        public static GoalRepository GoalRepo { get; private set; }
         public static LastNameRepository LastNameRepo { get; private set; }
         public static LeagueRepository LeagueRepo { get; private set; }
         public static MatchRepository MatchRepo { get; private set; }
@@ -28,6 +28,13 @@ namespace OffseasonGM
             InitializeRepositories(dbPath);
 
             var teams = TeamRepo.CreateTeams(30);
+            var season = SeasonRepo.AddNewSeason(2016);
+            
+            foreach (var team in teams)
+            {
+                season.Teams.Add(team);
+                team.Seasons.Add(season);
+            }
 
             for (var home = 0; home < 30; home++)
             {
@@ -38,10 +45,25 @@ namespace OffseasonGM
                         continue;
                     }
 
-                    var match = new Match() { HomeTeam = teams[home], AwayTeam = teams[away] };
-                    match.PlayGame();
+                    var match = MatchRepo.AddNewMatch(season.Id, teams[home], teams[away]);
+                    match.PlayGame();                    
+
+                    foreach (var goal in match.Goals)
+                    {
+                        GoalRepo.AddNewGoal(goal);
+                    }
+
+                    MatchRepo.UpdateMatch(match);
+                    season.Matches.Add(match);
                 }
             }
+
+            foreach (var team in teams)
+            {
+                TeamRepo.UpdateTeam(team);
+            }
+
+            SeasonRepo.UpdateSeason(season);
 
             MainPage = new TeamsPage(dbPath, teams.First().Id);
         }

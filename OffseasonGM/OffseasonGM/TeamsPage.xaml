@@ -4,13 +4,18 @@
              x:Class="OffseasonGM.TeamsPage"
              Title="TeamsPage">
     <ScrollView>
-        <StackLayout Padding="10">
+        <StackLayout Padding="10" BackgroundColor="Black">
             <StackLayout Orientation="Horizontal">
-                <Button Text="&lt;" Clicked="CycleBackward"/>
-                <Label x:Name="LongTeamNameLabel"/>
-                <Button Text="&gt;" Clicked="CycleForward"/>
+                <Button Text="&lt;" Clicked="CycleBackward" BackgroundColor="Black" TextColor="White"/>
+                <Label x:Name="LongTeamNameLabel" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+                <Button Text="&gt;" Clicked="CycleForward" BackgroundColor="Black" TextColor="White"/>
             </StackLayout>
-            <Label Text="TODO" FontSize="40"/>            
+            <Label x:Name="TeamRecordLabel" Text="" TextColor="White"/>
+            <Grid x:Name="PlayerGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>                    
+                </Grid.ColumnDefinitions>                
+            </Grid>
         </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -29,7 +29,9 @@ namespace OffseasonGM.Models
         public int FirstLineTime { get; set; }
         public int SecondLineTime { get; set; }
         public int ThirdLineTime { get; set; }
-        public int FourthLineTime { get; set; }        
+        public int FourthLineTime { get; set; }
+
+
 
         [OneToMany]
         public List<Player> Players { get; set; }
@@ -53,6 +55,78 @@ namespace OffseasonGM.Models
         public List<Player> LeftWingOrdering { get; set; }
         [Ignore]
         public List<Player> RightWingOrdering { get; set; }
+        [Ignore]
+        public Season LatestSeason
+        {
+            get
+            {
+                return Seasons.Last();
+            }
+        }
+        [Ignore]
+        public IEnumerable<Match> LatestSeasonHomeGames
+        {
+            get
+            {
+                return HomeGames.Where(game => game.SeasonId == LatestSeason.Id);
+            }
+        }
+        [Ignore]
+        public IEnumerable<Match> LatestSeasonAwayGames
+        {
+            get
+            {
+                return AwayGames.Where(game => game.SeasonId == LatestSeason.Id);
+            }
+        }
+        [Ignore]
+        public IEnumerable<Match> LatestSeasonMatches
+        {
+            get
+            {
+                return LatestSeasonHomeGames.Concat(LatestSeasonAwayGames);
+            }
+        }
+        [Ignore]
+        public int LatestSeasonMatchCount
+        {
+            get
+            {
+                return LatestSeasonMatches.ToList().Count;
+            }
+        }
+        [Ignore]
+        public int LatestSeasonWinCount
+        {
+            get
+            {
+                return LatestSeasonHomeGames.Count(match => match.HomeGoalCount > match.AwayGoalCount) + LatestSeasonAwayGames.Count(match => match.AwayGoalCount > match.HomeGoalCount);
+            }
+        }
+        [Ignore]
+        public int LatestSeasonLossCount
+        {
+            get
+            {
+                return LatestSeasonHomeGames.Count(match => match.HomeGoalCount < match.AwayGoalCount) + LatestSeasonAwayGames.Count(match => match.AwayGoalCount < match.HomeGoalCount);
+            }
+        }
+        [Ignore]
+        public int LatestSeasonDrawCount
+        {
+            get
+            {
+                return LatestSeasonHomeGames.Count(match => match.HomeGoalCount == match.AwayGoalCount) + LatestSeasonAwayGames.Count(match => match.AwayGoalCount == match.HomeGoalCount);
+            }
+        }
+        [Ignore]
+        public string FormatedSeasonRecord
+        {
+            get
+            {
+                return string.Join(" - ", new[] { LatestSeasonMatchCount, LatestSeasonWinCount, LatestSeasonDrawCount, LatestSeasonLossCount });
+            }            
+        }
 
         public List<int> DefenseShiftTimes
         {
@@ -77,7 +151,7 @@ namespace OffseasonGM.Models
             CenterOrdering = Players.Where(player => player.Position == Player.PlayerPosition.Center).OrderByDescending(player => player.Overall).ToList();
             LeftWingOrdering = Players.Where(player => player.Position == Player.PlayerPosition.LeftWing).OrderByDescending(player => player.Overall).ToList();
             RightWingOrdering = Players.Where(player => player.Position == Player.PlayerPosition.RightWing).OrderByDescending(player => player.Overall).ToList();
-        }
+        }        
 
         public override string ToString()
         {
