@@ -21,6 +21,7 @@ namespace OffseasonGM.Models
         
         private const int opportunityGap = 35;
         private const int timeVariance = 15;
+        private const int maximumRebounds = 2;
 
         [Ignore]
         private int _homePair { get; set; }
@@ -163,31 +164,46 @@ namespace OffseasonGM.Models
         private void HandleOpportunity()
         {
             var homeAttacks = HomeTeamAttacks(_homePair, _homeLine, _awayPair, _awayLine);
+            var defendingGoalie = homeAttacks
+                ? awayGoalie
+                : homeGoalie;
             var shooter = GetShooter(homeAttacks ? HomeTeam : AwayTeam,
                                      homeAttacks ? _homePair : _awayPair,
+                                     homeAttacks ? _homeLine : _awayLine);                       
+
+            for (var i = 0; i < 1 + maximumRebounds; i++)
+            {
+                var hitsTarget = ShotHitsTarget(shooter);
+                if (!hitsTarget)
+                {
+                    return;
+                }
+
+                if (homeAttacks)
+                {
+                    HomeShots += 1;
+                }
+                else
+                {
+                    AwayShots += 1;
+                }
+
+                var shooterScores = ShotScores(shooter, defendingGoalie);
+
+                if (shooterScores)
+                {
+                    break;
+                }
+
+                if (i == maximumRebounds || !LeavesDangerousRebound(defendingGoalie, shooter))
+                {
+                    return;
+                }
+
+                shooter = GetShooter(homeAttacks ? HomeTeam : AwayTeam,
+                                     homeAttacks ? _homePair : _awayPair,
                                      homeAttacks ? _homeLine : _awayLine);
-
-            var hitsTarget = ShotHitsTarget(shooter);
-            if (!hitsTarget)
-            {
-                return;
-            }
-
-            if (homeAttacks)
-            {
-                HomeShots += 1;
-            }
-            else
-            {
-                AwayShots += 1;
-            }
-
-            var shooterScores = ShotScores(shooter, homeAttacks ? awayGoalie : homeGoalie);
-
-            if (!shooterScores)
-            {
-                return;
-            }
+            }            
 
             var assistCountRoll = random.NextDouble() * 30.0;
             var assistCount = assistCountRoll < 2.0
@@ -209,6 +225,19 @@ namespace OffseasonGM.Models
                                 assisters);
 
             Goals.Add(goal);
+        }
+
+        private bool LeavesDangerousRebound(Player goalie, Player shooter)
+        {
+            for (var i = 0; i < 3; i ++)
+            {
+                if (random.NextDouble() * 50.0 < goalie.ReboundControl)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private bool HomeTeamAttacks(int homePair, int homeLine, int awayPair, int awayLine)
