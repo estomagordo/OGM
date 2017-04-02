@@ -19,7 +19,7 @@ namespace OffseasonGM.Models
             Opportunity
         }
         
-        private const int opportunityGap = 20;
+        private const int opportunityGap = 35;
         private const int timeVariance = 15;
 
         [Ignore]
