@@ -23,6 +23,18 @@ namespace OffseasonGM.Models
         private const int timeVariance = 15;
 
         [Ignore]
+        private int _homePair { get; set; }
+        [Ignore]
+        private int _homeLine { get; set; }
+        [Ignore]
+        private int _awayPair { get; set; }
+        [Ignore]
+        private int _awayLine { get; set; }
+        [Ignore]
+        private int _periodNumber { get; set; }
+        [Ignore]
+        private int _second { get; set; }
+        [Ignore]
         private Player homeGoalie { get; set; }
 
         [Ignore]
@@ -90,6 +102,7 @@ namespace OffseasonGM.Models
 
         public void PlayGame(Random random)
         {
+            _periodNumber = 0;
             this.random = random;
 
             homeGoalie = HomeTeam.GoalieOrdering[random.NextDouble() <= HomeTeam.FirstGoalieShare ? 0 : 1];
@@ -106,10 +119,12 @@ namespace OffseasonGM.Models
 
         private void PlayPeriod(int periodNumber)
         {
-            var homePair = 0;
-            var homeLine = 0;
-            var awayPair = 0;
-            var awayLine = 0;
+            _periodNumber++;
+
+            _homePair = 0;
+            _homeLine = 0;
+            _awayPair = 0;
+            _awayLine = 0;
 
             var events = new List<(int second, MatchEvent matchEvent)>();
 
@@ -123,72 +138,77 @@ namespace OffseasonGM.Models
 
             foreach (var me in events)
             {
+                _second = me.second;
                 switch (me.matchEvent)
                 {
                     case MatchEvent.HomeDefenseShift:
-                        homePair = (homePair + 1) % 3;
+                        _homePair = (_homePair + 1) % 3;
                         break;
                     case MatchEvent.HomeAttackShift:
-                        homeLine = (homeLine + 1) % 4;
+                        _homeLine = (_homeLine + 1) % 4;
                         break;
                     case MatchEvent.AwayDefenseShift:
-                        awayPair = (homePair + 1) % 3;
+                        _awayPair = (_homePair + 1) % 3;
                         break;
                     case MatchEvent.AwayAttackShift:
-                        awayLine = (homeLine + 1) % 4;
+                        _awayLine = (_homeLine + 1) % 4;
                         break;
                     default:
-                        var homeAttacks = HomeTeamAttacks(homePair, homeLine, awayPair, awayLine);
-                        var shooter = GetShooter(homeAttacks ? HomeTeam : AwayTeam,
-                                                 homeAttacks ? homePair : awayPair,
-                                                 homeAttacks ? homeLine : awayLine);
-
-                        var hitsTarget = ShotHitsTarget(shooter);
-                        if (!hitsTarget)
-                        {
-                            break;
-                        }
-
-                        if (homeAttacks)
-                        {
-                            HomeShots += 1;
-                        }
-                        else
-                        {
-                            AwayShots += 1;
-                        }
-
-                        var shooterScores = ShotScores(shooter, homeAttacks ? awayGoalie : homeGoalie);
-
-                        if (!shooterScores)
-                        {
-                            break;
-                        }
-
-                        var assistCountRoll = random.NextDouble() * 30.0;
-                        var assistCount = assistCountRoll < 2.0
-                            ? 0
-                            : assistCountRoll < 7.0
-                                ? 1
-                                : 2;
-
-                        var assisters = GetAssisters(assistCount,
-                                                     homeAttacks ? HomeTeam : AwayTeam,
-                                                     shooter,
-                                                     homeAttacks ? homePair : awayPair,
-                                                     homeAttacks ? homeLine : awayLine);
-
-                        var goal = new Goal(homeAttacks ? HomeTeam :AwayTeam,
-                                            periodNumber,
-                                            me.second,
-                                            shooter,
-                                            assisters);
-
-                        Goals.Add(goal);
-
+                        HandleOpportunity();
                         break;
                 }
             }
+        }
+
+        private void HandleOpportunity()
+        {
+            var homeAttacks = HomeTeamAttacks(_homePair, _homeLine, _awayPair, _awayLine);
+            var shooter = GetShooter(homeAttacks ? HomeTeam : AwayTeam,
+                                     homeAttacks ? _homePair : _awayPair,
+                                     homeAttacks ? _homeLine : _awayLine);
+
+            var hitsTarget = ShotHitsTarget(shooter);
+            if (!hitsTarget)
+            {
+                return;
+            }
+
+            if (homeAttacks)
+            {
+                HomeShots += 1;
+            }
+            else
+            {
+                AwayShots += 1;
+            }
+
+            var shooterScores = ShotScores(shooter, homeAttacks ? awayGoalie : homeGoalie);
+
+            if (!shooterScores)
+            {
+                return;
+            }
+
+            var assistCountRoll = random.NextDouble() * 30.0;
+            var assistCount = assistCountRoll < 2.0
+                ? 0
+                : assistCountRoll < 7.0
+                    ? 1
+                    : 2;
+
+            var assisters = GetAssisters(assistCount,
+                                         homeAttacks ? HomeTeam : AwayTeam,
+                                         shooter,
+                                         homeAttacks ? _homePair : _awayPair,
+                                         homeAttacks ? _homeLine : _awayLine);
+
+            var goal = new Goal(homeAttacks ? HomeTeam : AwayTeam,
+                                _periodNumber,
+                                _second,
+                                shooter,
+                                assisters);
+
+            Goals.Add(goal);
         }
 
         private bool HomeTeamAttacks(int homePair, int homeLine, int awayPair, int awayLine)
