@@ -34,6 +34,11 @@ namespace OffseasonGM.Models
                 return Teams.Average(team => team.City.Longitude);
             }
         }
+
+        public Division()
+        {
+            Teams = new List<Team>();
+        }
        
         public double SquaredDistanceTo(IGeographical other)
         {
