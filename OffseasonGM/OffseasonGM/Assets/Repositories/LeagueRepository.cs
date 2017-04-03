@@ -15,12 +15,10 @@ namespace OffseasonGM.Assets.Repositories
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
         }
 
-        public League AddNewLeague()
+        public League AddNewLeague(League league)
         {
             try
-            {
-                var timeStamp = DateTime.Now;
-                var league = new League() { Created = timeStamp, LastChanged = timeStamp, Teams = new List<Team>() };
+            {                
                 connection.Insert(league);
                 return league;
             }

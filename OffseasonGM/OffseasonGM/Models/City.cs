@@ -1,10 +1,11 @@
 ﻿using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
+using System;
 
 namespace OffseasonGM.Models
 {
-    public class City
+    public class City : IGeographical
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -17,5 +18,10 @@ namespace OffseasonGM.Models
 
         [OneToMany]
         public List<Team> Teams { get; set; }
+
+        public double SquaredDistanceTo(IGeographical other)
+        {
+            return (Latitude - other.Latitude) * (Latitude - other.Latitude) + (Longitude - other.Longitude) * (Longitude - other.Longitude);
+        }
     }
 }

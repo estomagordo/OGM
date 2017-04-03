@@ -15,6 +15,9 @@ namespace OffseasonGM.Models
 
         public int StartYear { get; set; }
 
+        [ForeignKey(typeof(League))]
+        public int LeagueId { get; set; }
+
         [ManyToMany(typeof(SeasonTeam))]
         public List<Team> Teams { get; set; }
 

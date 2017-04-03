@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="BusinessObjects\Division.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
+    <Compile Include="IGeographical.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
