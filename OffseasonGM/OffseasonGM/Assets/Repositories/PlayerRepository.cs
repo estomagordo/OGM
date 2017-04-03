@@ -25,36 +25,22 @@ namespace OffseasonGM.Assets.Repositories
             random = new Random();
         }
 
+        public Player InsertPlayer(Player player)
+        {
+            try
+            {
+                connection.Insert(player);
+                return player;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public List<Player> GetAllPlayers()
         {
             return connection.GetAllWithChildren<Player>();
-        }         
-
-        private Player InsertPlayer(int firstNameId, int lastNameId)
-        {
-            try
-            {                
-                var player = new Player() { FirstNameId = firstNameId, LastNameId = lastNameId, Seasons = new List<Season>(), Matches = new List<Match>() };
-                connection.Insert(player);
-                return player;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }     
-        
-        private Player InsertPlayer(Player player)
-        {
-            try
-            {
-                connection.Insert(player);
-                return player;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
         }
     }
 }
