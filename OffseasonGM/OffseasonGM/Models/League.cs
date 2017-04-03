@@ -57,7 +57,8 @@ namespace OffseasonGM.Models
         public League(LeagueConfiguration configuration, int startYear)
         {            
             StartYear = startYear;
-            Configuration = configuration;            
+            Configuration = configuration;
+            Seasons = new List<Season>();
             CreateDivisions();            
         }
 
@@ -76,10 +77,10 @@ namespace OffseasonGM.Models
         {
             var maxDivisionTeamCounts = GetDivisionTeamCounts();
 
-            while (Divisions.Select(division => division.Teams.Count).ToArray() != maxDivisionTeamCounts)
+            while (!Enumerable.SequenceEqual(Divisions.Select(division => division.Teams.Count).ToArray(), maxDivisionTeamCounts))
             {
                 (Team team, Division division) bestPair = (null, null);
-                var furthestNeighbour = 0.0;
+                var furthestNeighbour = double.MinValue;
 
                 for (var i = 0; i < Teams.Count; i++)
                 {
@@ -97,7 +98,7 @@ namespace OffseasonGM.Models
                     {
                         var division = Divisions[j];
                         var divisionHasRoom = division.Teams.Count < maxDivisionTeamCounts[j];
-                        var squaredDistance = team.City.SquaredDistanceTo(division);
+                        var squaredDistance = division.SquaredDistanceTo(team.City);
 
                         if (divisionHasRoom && squaredDistance < closestDistance)
                         {

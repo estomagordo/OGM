@@ -42,6 +42,11 @@ namespace OffseasonGM.Models
        
         public double SquaredDistanceTo(IGeographical other)
         {
+            if (!Teams.Any())
+            {
+                return 0.0;
+            }
+
             return (Latitude - other.Latitude) * (Latitude - other.Latitude) + (Longitude - other.Longitude) * (Longitude - other.Longitude);
         }
     }
