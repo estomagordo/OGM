@@ -55,6 +55,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Default.resx</DependentUpon>
     </Compile>
+    <Compile Include="BusinessObjects\Division.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
