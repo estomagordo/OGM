@@ -16,6 +16,8 @@ namespace OffseasonGM.Models
             Teams32Divisions4
         }
 
+        private int[] _maxDivisionTeamCounts;        
+
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
@@ -59,6 +61,7 @@ namespace OffseasonGM.Models
             StartYear = startYear;
             Configuration = configuration;
             Seasons = new List<Season>();
+            SetDivisionTeamCounts();
             CreateDivisions();            
         }
 
@@ -74,17 +77,18 @@ namespace OffseasonGM.Models
         }
 
         public void FillDivisions()
-        {
-            var maxDivisionTeamCounts = GetDivisionTeamCounts();
+        {            
+            var latitudalTeams = Teams.OrderBy(team => team.City.Latitude).ToList();
+            PutTeamsInTheCorners(latitudalTeams);
 
-            while (!Enumerable.SequenceEqual(Divisions.Select(division => division.Teams.Count).ToArray(), maxDivisionTeamCounts))
+            while (!Enumerable.SequenceEqual(Divisions.Select(division => division.Teams.Count).ToArray(), _maxDivisionTeamCounts))
             {
                 (Team team, Division division) bestPair = (null, null);
                 var furthestNeighbour = double.MinValue;
 
-                for (var i = 0; i < Teams.Count; i++)
+                for (var i = 0; i < latitudalTeams.Count; i++)
                 {
-                    var team = Teams[i];
+                    var team = latitudalTeams[i];
                     (Team team, Division division) pair = (null, null);
 
                     if (Divisions.Any(division => division.Teams.Contains(team)))
@@ -97,7 +101,7 @@ namespace OffseasonGM.Models
                     for (var j = 0; j < Divisions.Count; j++)
                     {
                         var division = Divisions[j];
-                        var divisionHasRoom = division.Teams.Count < maxDivisionTeamCounts[j];
+                        var divisionHasRoom = division.Teams.Count < _maxDivisionTeamCounts[j];
                         var squaredDistance = division.SquaredDistanceTo(team.City);
 
                         if (divisionHasRoom && squaredDistance < closestDistance)
@@ -119,19 +123,35 @@ namespace OffseasonGM.Models
             }
         }
 
-        private int[] GetDivisionTeamCounts()
+        private void PutTeamsInTheCorners(List<Team> latitudalTeams)
         {
-            switch (Configuration)
+            var east = latitudalTeams.Take(latitudalTeams.Count / 2);
+            var west = latitudalTeams.Skip(latitudalTeams.Count / 2);
+
+            var eastLongitudal = east.OrderBy(team => team.City.Longitude).ToList();
+            var westLongitudal = west.OrderBy(team => team.City.Longitude).ToList();
+
+            Divisions[0].Teams.Add(eastLongitudal.First());
+            Divisions[1].Teams.Add(eastLongitudal.Last());
+            Divisions[2].Teams.Add(westLongitudal.First());
+            Divisions[3].Teams.Add(westLongitudal.Last());
+
+            if (Divisions.Count > 4)
             {
-                case LeagueConfiguration.Teams30Divisions4:
-                    return new int[] { 7, 7, 8, 8 };                    
-                case LeagueConfiguration.Teams30Divisions6:
-                    return new int[] { 5, 5, 5, 5, 5, 5 };
-                case LeagueConfiguration.Teams31Divisions4:
-                    return new int[] { 7, 8, 8, 8 };
-                default:
-                    return new int[] { 8, 8, 8, 8 };
+                Divisions[5].Teams.Add(eastLongitudal[eastLongitudal.Count() / 2]);
+                Divisions[6].Teams.Add(westLongitudal[westLongitudal.Count() / 2]);
             }
+        }
+
+        private void SetDivisionTeamCounts()
+        {
+            _maxDivisionTeamCounts = Configuration == LeagueConfiguration.Teams30Divisions4
+                ? new int[] { 7, 7, 8, 8 }
+                : Configuration == LeagueConfiguration.Teams30Divisions6
+                    ? new int[] { 5, 5, 5, 5, 5 }
+                    : Configuration == LeagueConfiguration.Teams31Divisions4
+                        ? new int[] { 7, 8, 8, 8 }
+                        : new int[] { 8, 8, 8, 8 };
         }
     }
 }
