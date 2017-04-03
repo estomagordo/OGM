@@ -70,9 +70,9 @@ namespace OffseasonGM
         {
             random = new Random();
 
-            InitializeComponent();
-            SetNamesForNations();
+            InitializeComponent();            
             InitializeRepositories(dbPath);
+            SetNamesForNations();
 
             var teams = CreateTeams(30);
             var season = new Season(2016);
@@ -120,6 +120,8 @@ namespace OffseasonGM
 
         private void SetNamesForNations()
         {
+            _nationNames = new Dictionary<Nation, (List<FirstName> firstNames, List<LastName> lastNames)>();
+
             foreach(var nation in Nations)
             {
                 _nationNames[nation] = (FirstNames.Where(name => name.Nations.Contains(nation)).ToList(), LastNames.Where(name => name.Nations.Contains(nation)).ToList());

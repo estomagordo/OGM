@@ -24,5 +24,20 @@ namespace OffseasonGM.Models
 
         [OneToMany]
         public List<Player> Players { get; set; }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Nation);
+        }
+
+        public bool Equals(Nation nation)
+        {
+            return nation != null && nation.Id == Id;
+        }
     }
 }
