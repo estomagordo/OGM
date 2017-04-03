@@ -32,6 +32,7 @@ namespace OffseasonGM.Assets.Repositories
             connection.CreateTable<NationLastName>();
             connection.CreateTable<SeasonPlayer>();
             connection.CreateTable<SeasonTeam>();
+            connection.CreateTable<Division>();
         }
 
         private void DeleteAllContent()
@@ -52,6 +53,7 @@ namespace OffseasonGM.Assets.Repositories
             connection.DeleteAll<NationLastName>();
             connection.DeleteAll<SeasonPlayer>();
             connection.DeleteAll<SeasonTeam>();
+            connection.DeleteAll<Division>();
         }
     }
 }

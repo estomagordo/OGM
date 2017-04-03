@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Assets\Repositories\CityRepository.cs" />
+    <Compile Include="Assets\Repositories\DivisionRepository.cs" />
     <Compile Include="Assets\Repositories\FirstNameRepository.cs" />
     <Compile Include="Assets\Repositories\GeneralRepository.cs" />
     <Compile Include="Assets\Repositories\GoalRepository.cs" />
@@ -55,7 +56,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Default.resx</DependentUpon>
     </Compile>
-    <Compile Include="BusinessObjects\Division.cs" />
+    <Compile Include="Models\Division.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="IGeographical.cs" />
     <Compile Include="MainPage.xaml.cs">

@@ -74,8 +74,13 @@ namespace OffseasonGM
             InitializeRepositories(dbPath);
             SetNamesForNations();
 
+            var league = new League(League.LeagueConfiguration.Teams30Divisions4, 2016);
+
             var teams = CreateTeams(30);
             var season = new Season(2016);
+            league.Teams = teams;
+            league.FillDivisions();
+            league.Seasons.Add(season);
             
             foreach (var team in teams)
             {

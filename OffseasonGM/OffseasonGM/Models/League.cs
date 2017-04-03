@@ -1,5 +1,4 @@
-﻿using OffseasonGM.BusinessObjects;
-using SQLite.Net.Attributes;
+﻿using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -28,7 +27,10 @@ namespace OffseasonGM.Models
 
         public LeagueConfiguration Configuration { get; set; }
 
+        [OneToMany]
         public List<Division> Divisions { get; set; }
+
+        [Ignore]
         public List<Division> WesternConference
         {
             get
@@ -36,6 +38,8 @@ namespace OffseasonGM.Models
                 return Divisions.OrderByDescending(division => division.Longitude).Take(Divisions.Count / 2).ToList();
             }
         }
+
+        [Ignore]
         public List<Division> EasternConference
         {
             get
@@ -54,8 +58,7 @@ namespace OffseasonGM.Models
         {            
             StartYear = startYear;
             Configuration = configuration;            
-            CreateDivisions();
-            FillDivisions();
+            CreateDivisions();            
         }
 
         private void CreateDivisions()
@@ -69,7 +72,7 @@ namespace OffseasonGM.Models
             }
         }
 
-        private void FillDivisions()
+        public void FillDivisions()
         {
             var maxDivisionTeamCounts = GetDivisionTeamCounts();
 
