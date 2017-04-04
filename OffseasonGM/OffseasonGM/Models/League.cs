@@ -65,6 +65,31 @@ namespace OffseasonGM.Models
             CreateDivisions();            
         }
 
+        public void PlaySeason()
+        {
+            foreach (var westernDivision in WesternConference)
+            {
+                foreach (var westernTeam in westernDivision.Teams)
+                {
+                    foreach (var easternDivision in EasternConference)
+                    {
+                        foreach (var easternTeam in easternDivision.Teams)
+                        {
+                            PlayGame(westernTeam, easternTeam);
+                            PlayGame(easternTeam, westernTeam);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void PlayGame(Team home, Team away)
+        {
+            var match = new Match(Id, home, away);
+            match.PlayGame();
+            season.Matches.Add(match);
+        }
+
         private void CreateDivisions()
         {
             Divisions = new List<Division>();

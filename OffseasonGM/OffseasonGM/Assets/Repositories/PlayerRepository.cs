@@ -11,7 +11,6 @@ namespace OffseasonGM.Assets.Repositories
     public class PlayerRepository
     {
         SQLiteConnection connection;
-        Random random;
         FirstNameRepository firstNameRepo;
         LastNameRepository lastNameRepo;
         NationRepository nationRepo;        
@@ -21,8 +20,7 @@ namespace OffseasonGM.Assets.Repositories
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
             firstNameRepo = new FirstNameRepository(dbPath);
             lastNameRepo = new LastNameRepository(dbPath);
-            nationRepo = new NationRepository(dbPath);            
-            random = new Random();
+            nationRepo = new NationRepository(dbPath);
         }
 
         public Player InsertPlayer(Player player)

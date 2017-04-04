@@ -1,4 +1,5 @@
-﻿using OffseasonGM.Models;
+﻿using OffseasonGM.Global;
+using OffseasonGM.Models;
 using SQLite.Net;
 using SQLiteNetExtensions.Extensions;
 using System;
@@ -13,13 +14,11 @@ namespace OffseasonGM.Assets.Repositories
     public class NationRepository
     {
         SQLiteConnection connection;
-        Random random;
         List<Nation> nations;
 
         public NationRepository(string dbPath)
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-            random = new Random();
 
             var nationCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM Nation");
 
@@ -50,7 +49,7 @@ namespace OffseasonGM.Assets.Repositories
 
         public Nation GetRandomNation()
         {
-            var number = random.NextDouble();
+            var number = GlobalObjects.Random.NextDouble();
             var accumulated = 0.0;
             foreach (var nation in nations)
             {

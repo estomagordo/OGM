@@ -1,4 +1,5 @@
 ﻿using OffseasonGM.Extensions;
+using OffseasonGM.Global;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System;
@@ -116,7 +117,7 @@ namespace OffseasonGM.Models
             }
         }
 
-        public Player(Random random, int age, PlayerPosition position, Nation nation, FirstName firstName, LastName lastName)
+        public Player(int age, PlayerPosition position, Nation nation, FirstName firstName, LastName lastName)
         {
             Nation = nation;
             NationId = nation.Id;
@@ -133,11 +134,11 @@ namespace OffseasonGM.Models
             SecondAssists = new List<Goal>();
             Retired = false;
             
-            PeakAge = _meanPeakAge + (int)(_peakAgeVariance * random.NextDouble()) + (position == Player.PlayerPosition.Defenseman ? _defensemanLaterPeak : 0);
-            RetireAge = _meanRetireAge + (int)(_retireAgeVariance * random.NextDouble()) + (position == Player.PlayerPosition.Defenseman ? _defensemanLaterRetirement : 0);
+            PeakAge = _meanPeakAge + (int)(_peakAgeVariance * GlobalObjects.Random.NextDouble()) + (position == Player.PlayerPosition.Defenseman ? _defensemanLaterPeak : 0);
+            RetireAge = _meanRetireAge + (int)(_retireAgeVariance * GlobalObjects.Random.NextDouble()) + (position == Player.PlayerPosition.Defenseman ? _defensemanLaterRetirement : 0);
 
-            ImproveSpeed = 0.5 + 0.5 * random.NextDouble();
-            DeclineSpeed = (0.5 + 0.5 * random.NextDouble()) * improveContraDeclineFactor;
+            ImproveSpeed = 0.5 + 0.5 * GlobalObjects.Random.NextDouble();
+            DeclineSpeed = (0.5 + 0.5 * GlobalObjects.Random.NextDouble()) * improveContraDeclineFactor;
 
             Defense = Math.Max(0.0,
                 (position == Player.PlayerPosition.Defenseman
@@ -148,11 +149,11 @@ namespace OffseasonGM.Models
                 +
                 (position == Player.PlayerPosition.Defenseman
                 ? _stableStatMean
-                : _swingyStatMean) * random.NextGaussian());
+                : _swingyStatMean) * GlobalObjects.Random.NextGaussian());
 
-            Endurance = Math.Max(0.0, _normalStatMeanStart + _stableStatMean * random.NextGaussian());
+            Endurance = Math.Max(0.0, _normalStatMeanStart + _stableStatMean * GlobalObjects.Random.NextGaussian());
 
-            Fitness = Math.Max(0.0, _normalStatMeanStart + _stableStatMean * random.NextGaussian());
+            Fitness = Math.Max(0.0, _normalStatMeanStart + _stableStatMean * GlobalObjects.Random.NextGaussian());
 
             Passing = Math.Max(0.0,
                 (position == Player.PlayerPosition.Defenseman
@@ -161,7 +162,7 @@ namespace OffseasonGM.Models
                 +
                 (position == Player.PlayerPosition.Defenseman
                 ? _swingyStatMean
-                : _stableStatMean) * random.NextGaussian());
+                : _stableStatMean) * GlobalObjects.Random.NextGaussian());
 
             PuckControl = Math.Max(0.0, (
                 position == Player.PlayerPosition.Defenseman
@@ -170,11 +171,11 @@ namespace OffseasonGM.Models
                 +
                 (position == Player.PlayerPosition.Defenseman
                 ? _swingyStatMean
-                : _stableStatMean) * random.NextGaussian());
+                : _stableStatMean) * GlobalObjects.Random.NextGaussian());
 
-            ReboundControl = Math.Max(0.0, _strongStatMeanStart + _stableStatMean * random.NextGaussian());
+            ReboundControl = Math.Max(0.0, _strongStatMeanStart + _stableStatMean * GlobalObjects.Random.NextGaussian());
 
-            Saving = Math.Max(0.0, _strongStatMeanStart + _stableStatMean * random.NextGaussian());
+            Saving = Math.Max(0.0, _strongStatMeanStart + _stableStatMean * GlobalObjects.Random.NextGaussian());
 
             Shooting = Math.Max(0.0,
                 (position == Player.PlayerPosition.Defenseman
@@ -183,14 +184,14 @@ namespace OffseasonGM.Models
                 +
                 (position == Player.PlayerPosition.Defenseman
                 ? _swingyStatMean
-                : _stableStatMean) * random.NextGaussian());
+                : _stableStatMean) * GlobalObjects.Random.NextGaussian());
 
             Skating = Math.Max(0.0, (
                 (position == Player.PlayerPosition.LeftWing || position == Player.PlayerPosition.RightWing)
                     ? _strongStatMeanStart
                     : _normalStatMeanStart)
                 +
-                _stableStatMean * random.NextGaussian());
+                _stableStatMean * GlobalObjects.Random.NextGaussian());
         }
 
         public void HaveBirthday(Random random)

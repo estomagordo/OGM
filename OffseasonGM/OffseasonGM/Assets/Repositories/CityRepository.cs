@@ -9,20 +9,18 @@ using System.Text;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.IO;
-
+using OffseasonGM.Global;
 
 namespace OffseasonGM.Assets.Repositories
 {
     public class CityRepository
     {
         SQLiteConnection connection;
-        Random random;
         List<City> cities;
 
         public CityRepository(string dbPath)
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-            random = new Random();
             
             var cityCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM City");
 
@@ -61,7 +59,7 @@ namespace OffseasonGM.Assets.Repositories
             foreach (var city in cities)
             {
                 var needed = (double)n / (double)remaining;
-                var result = random.NextDouble();
+                var result = GlobalObjects.Random.NextDouble();
 
                 if (result <= needed)
                 {

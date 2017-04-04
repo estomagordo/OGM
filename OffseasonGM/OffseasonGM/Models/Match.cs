@@ -1,4 +1,5 @@
-﻿using SQLite.Net.Attributes;
+﻿using OffseasonGM.Global;
+using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -40,9 +41,6 @@ namespace OffseasonGM.Models
 
         [Ignore]
         private Player awayGoalie { get; set; }
-
-        [Ignore]
-        private Random random { get; set; }
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }        
@@ -101,13 +99,12 @@ namespace OffseasonGM.Models
             AwayTeam = away;
         }
 
-        public void PlayGame(Random random)
+        public void PlayGame()
         {
             _periodNumber = 0;
-            this.random = random;
 
-            homeGoalie = HomeTeam.GoalieOrdering[random.NextDouble() <= HomeTeam.FirstGoalieShare ? 0 : 1];
-            awayGoalie = AwayTeam.GoalieOrdering[random.NextDouble() <= AwayTeam.FirstGoalieShare ? 0 : 1];
+            homeGoalie = HomeTeam.GoalieOrdering[GlobalObjects.Random.NextDouble() <= HomeTeam.FirstGoalieShare ? 0 : 1];
+            awayGoalie = AwayTeam.GoalieOrdering[GlobalObjects.Random.NextDouble() <= AwayTeam.FirstGoalieShare ? 0 : 1];
 
             for (var i = 0; i < 3; i++)
             {
@@ -205,7 +202,7 @@ namespace OffseasonGM.Models
                                      homeAttacks ? _homeLine : _awayLine);
             }            
 
-            var assistCountRoll = random.NextDouble() * 30.0;
+            var assistCountRoll = GlobalObjects.Random.NextDouble() * 30.0;
             var assistCount = assistCountRoll < 2.0
                 ? 0
                 : assistCountRoll < 7.0
@@ -231,7 +228,7 @@ namespace OffseasonGM.Models
         {
             for (var i = 0; i < 3; i ++)
             {
-                if (random.NextDouble() * 50.0 < goalie.ReboundControl)
+                if (GlobalObjects.Random.NextDouble() * 50.0 < goalie.ReboundControl)
                 {
                     return false;
                 }
@@ -243,9 +240,9 @@ namespace OffseasonGM.Models
         private bool HomeTeamAttacks(int homePair, int homeLine, int awayPair, int awayLine)
         {
             var homeInitiave = GetTeamInitiative(HomeTeam, homePair, homeLine);
-            var homeLuck = 0.75 + random.NextDouble() / 2.0;
+            var homeLuck = 0.75 + GlobalObjects.Random.NextDouble() / 2.0;
             var awayInitiative = GetTeamInitiative(AwayTeam, awayPair, awayLine);
-            var awayLuck = 0.75 + random.NextDouble() / 2.0;
+            var awayLuck = 0.75 + GlobalObjects.Random.NextDouble() / 2.0;
 
             return homeInitiave * homeLuck > awayInitiative * awayLuck;
         }
@@ -261,7 +258,7 @@ namespace OffseasonGM.Models
             allShotInitiatives.Add(team.RightWingOrdering[line].Skating + team.RightWingOrdering[line].Shooting * 0.5);
 
             var totalShotInitiative = allShotInitiatives.Sum();
-            var initiativeRoll = totalShotInitiative * random.NextDouble();
+            var initiativeRoll = totalShotInitiative * GlobalObjects.Random.NextDouble();
 
             var cumulativeInitiative = allShotInitiatives[0];
 
@@ -294,12 +291,12 @@ namespace OffseasonGM.Models
         private bool ShotHitsTarget(Player shooter)
         {
             // TODO: An actual implementaton
-            return random.NextDouble() < 0.5;
+            return GlobalObjects.Random.NextDouble() < 0.5;
         }
 
         private bool ShotScores(Player shooter, Player keeper)
         {
-            return shooter.Shooting * random.NextDouble() > keeper.Saving * random.NextDouble() * 6.0;
+            return shooter.Shooting * GlobalObjects.Random.NextDouble() > keeper.Saving * GlobalObjects.Random.NextDouble() * 6.0;
         }
 
         private List<Player> GetAssisters(int assisterCount, Team team, Player scorer, int pair, int line)
@@ -316,7 +313,7 @@ namespace OffseasonGM.Models
             for (var i = 0; i < assisterCount; i++)
             {
                 var totalPassing = players.Sum(player => (player.Position == Player.PlayerPosition.Defenseman ? 0.5 : 1.0) * player.Passing);
-                var passingRoll = random.NextDouble() * totalPassing;
+                var passingRoll = GlobalObjects.Random.NextDouble() * totalPassing;
                 var cumulativePassing = 0.0;
 
                 Player assister = null;
@@ -364,7 +361,7 @@ namespace OffseasonGM.Models
             var position = 0;
             while (true)
             {
-                second += (int)(intervals[position++ % intervals.Count] + random.NextDouble() * timeVariance - timeVariance / 2.0);
+                second += (int)(intervals[position++ % intervals.Count] + GlobalObjects.Random.NextDouble() * timeVariance - timeVariance / 2.0);
                 if (second >= 1200)
                 {
                     return eventList;

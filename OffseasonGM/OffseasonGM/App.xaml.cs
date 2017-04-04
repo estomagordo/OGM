@@ -1,4 +1,5 @@
 ﻿using OffseasonGM.Assets.Repositories;
+using OffseasonGM.Global;
 using OffseasonGM.Models;
 using System;
 using System.Collections.Generic;
@@ -26,9 +27,7 @@ namespace OffseasonGM
         public static NickNameRepository NickNameRepo { get; private set; }
         public static PlayerRepository PlayerRepo { get; private set; }
         public static SeasonRepository SeasonRepo { get; private set; }
-        public static TeamRepository TeamRepo { get; private set; }
-
-        private Random random;
+        public static TeamRepository TeamRepo { get; private set; }        
 
         public List<Nation> Nations
         {
@@ -68,8 +67,6 @@ namespace OffseasonGM
 
         public App(string dbPath)
         {
-            random = new Random();
-
             InitializeComponent();            
             InitializeRepositories(dbPath);
             SetNamesForNations();
@@ -100,7 +97,7 @@ namespace OffseasonGM
                     }
 
                     var match = new Match(season.Id, teams[home], teams[away]);
-                    match.PlayGame(random);
+                    match.PlayGame();
                     season.Matches.Add(match);
                 }
             }
@@ -135,19 +132,19 @@ namespace OffseasonGM
 
         private Nation GetRandomNation()
         {
-            return Nations[random.Next(Nations.Count)];
+            return Nations[GlobalObjects.Random.Next(Nations.Count)];
         }
 
         private FirstName GetRandomFirstNameForNation(Nation nation)
         {
             var nameList = _nationNames[nation].firstNames;
-            return nameList[random.Next(nameList.Count)];
+            return nameList[GlobalObjects.Random.Next(nameList.Count)];
         }
 
         private LastName GetRandomLastNameForNation(Nation nation)
         {
             var nameList = _nationNames[nation].lastNames;
-            return nameList[random.Next(nameList.Count)];
+            return nameList[GlobalObjects.Random.Next(nameList.Count)];
         }
 
         private void InitializeRepositories(string dbPath)
@@ -183,40 +180,40 @@ namespace OffseasonGM
             for (var i = 0; i < 3; i++)
             {
                 var nationAndNames = GetPlayerNationAndNames();
-                var goalie = new Player(random, 18, Player.PlayerPosition.Goalie, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
+                var goalie = new Player(18, Player.PlayerPosition.Goalie, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
                 team.Players.Add(goalie);
             }
             for (var i = 0; i < 8; i++)
             {
                 var nationAndNames = GetPlayerNationAndNames();
-                var defenseman = new Player(random, 18, Player.PlayerPosition.Defenseman, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
+                var defenseman = new Player(18, Player.PlayerPosition.Defenseman, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
                 team.Players.Add(defenseman);
             }
             for (var i = 0; i < 5; i++)
             {
                 var nationAndNames = GetPlayerNationAndNames();
-                var center = new Player(random, 18, Player.PlayerPosition.Center, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
+                var center = new Player(18, Player.PlayerPosition.Center, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
                 team.Players.Add(center);
             }
             for (var i = 0; i < 5; i++)
             {
                 var nationAndNames = GetPlayerNationAndNames();
-                var leftWing = new Player(random, 18, Player.PlayerPosition.LeftWing, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
+                var leftWing = new Player(18, Player.PlayerPosition.LeftWing, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
                 team.Players.Add(leftWing);
             }
             for (var i = 0; i < 5; i++)
             {
                 var nationAndNames = GetPlayerNationAndNames();
-                var rightWing = new Player(random, 18, Player.PlayerPosition.RightWing, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
+                var rightWing = new Player(18, Player.PlayerPosition.RightWing, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
                 team.Players.Add(rightWing);
             }
 
             foreach (var player in team.Players)
             {
-                var birthDays = random.Next(13);
+                var birthDays = GlobalObjects.Random.Next(13);
                 for (var i = 0; i < birthDays; i++)
                 {
-                    player.HaveBirthday(random);
+                    player.HaveBirthday();
                 }
 
                 player.Team = team;
@@ -237,7 +234,7 @@ namespace OffseasonGM
         {
             for (var i = 0; i < list.Count; i++)
             {
-                Swap(list, i, random.Next(i, list.Count));
+                Swap(list, i, GlobalObjects.Random.Next(i, list.Count));
             }
         }
 
