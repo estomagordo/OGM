@@ -82,6 +82,7 @@ namespace OffseasonGM.Assets.Managers
         {
             _dbPath = dbPath;
             _repositoryLocator = repositoryLocator;
+            InitializeRepositories();
             SetNamesForNations();
         }       
         
