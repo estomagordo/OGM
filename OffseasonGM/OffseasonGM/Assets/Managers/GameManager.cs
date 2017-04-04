@@ -78,6 +78,7 @@ namespace OffseasonGM.Assets.Managers
 
         public GameManager(string dbPath)
         {
+            _dbPath = dbPath;
             InitializeRepositories();
             SetNamesForNations();
         }       
