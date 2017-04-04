@@ -90,6 +90,16 @@ namespace OffseasonGM.Models
             {
                 PlayIntraDivisionalGames(division);
             }
+
+            RoundUpSeason();
+        }
+
+        private void RoundUpSeason()
+        {
+            foreach (var team in Teams)
+            {
+                team.Seasons.Add(Seasons.Last());
+            }
         }
 
         private void PlayInterConferentialGames()

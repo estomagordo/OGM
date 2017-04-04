@@ -99,7 +99,17 @@ namespace OffseasonGM.Assets.Managers
         {
             var season = new Season(2016);
             _league.Seasons.Add(season);
+            SetupTeams();
             _league.PlaySeason();
+        }
+
+        private void SetupTeams()
+        {
+            foreach (var team in Teams)
+            {   
+                AddPlayersToNewTeam(team);
+                team.ArrangeBestTeam();
+            }
         }
 
         private List<Team> CreateTeams(int n)
