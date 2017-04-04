@@ -91,6 +91,8 @@ namespace OffseasonGM.Models
                 PlayIntraDivisionalGames(division);
             }
 
+            PlayTrailingGames();
+
             RoundUpSeason();
         }
 
@@ -157,27 +159,53 @@ namespace OffseasonGM.Models
             }
             alternateTeamList.Shuffle();
 
-            while (alternateTeamList.Any(team => team.AwayGames.Count % 41 > 0 || team.HomeGames.Count % 41 > 0))
+            while (alternateTeamList.Count(team => team.AwayGames.Count % 41 > 0 || team.HomeGames.Count % 41 > 0) > 1)
             {
                 for (var i = 0; i < alternateTeamList.Count - 1; i++)
                 {
+
                     var iTeam = alternateTeamList[i];
-                    for (var j = 0; j < alternateTeamList.Count; j++)
+                    for (var j = i+1; j < alternateTeamList.Count; j++)
                     {
                         var jTeam = alternateTeamList[j];
                         var iHasMoreHomeGames = iTeam.HomeGames.Count > jTeam.HomeGames.Count;
                         var equalAmountOfHomeGamesAndTails = iTeam.HomeGames.Count == jTeam.HomeGames.Count && GlobalObjects.Random.Next(2) == 0;
 
+                        var iHasHomeGamesRemaining = iTeam.HomeGames.Count % 41 > 0;
+                        var iHasAwayGamesRemaining = iTeam.AwayGames.Count % 41 > 0;
+                        var jHasHomeGamesRemaining = jTeam.HomeGames.Count % 41 > 0;
+                        var jHasAwayGamesRemaining = jTeam.AwayGames.Count % 41 > 0;
+
                         if (iHasMoreHomeGames || equalAmountOfHomeGamesAndTails)
                         {
-                            PlayGame(jTeam, iTeam);
+                            if (jHasHomeGamesRemaining && iHasAwayGamesRemaining)
+                            {
+                                PlayGame(jTeam, iTeam);
+                            }                            
                         }
                         else
                         {
-                            PlayGame(iTeam, jTeam);
+                            if (iHasHomeGamesRemaining && jHasAwayGamesRemaining)
+                            {
+                                PlayGame(iTeam, jTeam);
+                            }                            
                         }
                     }
                 }
+            }
+        }
+
+        private void PlayTrailingGames()
+        {
+            while (true)
+            {
+                var needsHomeGame = Teams.FirstOrDefault(team => team.HomeGames.Count % 41 > 0);
+                if (needsHomeGame == null)
+                {
+                    return;
+                }
+                var needsAwayGame = Teams.First(team => team.AwayGames.Count % 41 > 0);
+                PlayGame(needsHomeGame, needsAwayGame);
             }
         }
 
