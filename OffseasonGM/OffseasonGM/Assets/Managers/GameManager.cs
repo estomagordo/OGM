@@ -97,7 +97,8 @@ namespace OffseasonGM.Assets.Managers
 
         public void PlaySeason()
         {
-            var season = new Season(2016);
+            var startYear = _league.StartYear + _league.Seasons.Count();
+            var season = new Season(startYear);
             _league.Seasons.Add(season);
             SetupTeams();
             _league.PlaySeason();

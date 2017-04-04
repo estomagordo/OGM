@@ -98,9 +98,15 @@ namespace OffseasonGM.Models
 
         private void RoundUpSeason()
         {
+            var lastSeason = Seasons.Last();
+
             foreach (var team in Teams)
             {
-                team.Seasons.Add(Seasons.Last());
+                team.Seasons.Add(lastSeason);
+                foreach (var player in team.Players)
+                {
+                    player.Seasons.Add(lastSeason);
+                }
             }
         }
 
