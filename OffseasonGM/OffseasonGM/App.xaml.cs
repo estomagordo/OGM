@@ -16,7 +16,7 @@ namespace OffseasonGM
         {
             InitializeComponent();
 
-            var manager = new GameManager(dbPath);
+            var manager = new GameManager(new RepositoryLocator(), dbPath);
             manager.CreateLeague(League.LeagueConfiguration.Teams30Divisions4, 2016);
             manager.SetupLeague();
             manager.PlaySeason();

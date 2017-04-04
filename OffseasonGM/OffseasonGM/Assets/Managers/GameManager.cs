@@ -19,18 +19,20 @@ namespace OffseasonGM.Assets.Managers
         private League _league;
         private string _dbPath;
 
-        private static GeneralRepository GeneralRepo { get; set; }        
-        private static CityRepository CityRepo { get; set; }
-        private static FirstNameRepository FirstNameRepo { get; set; }
-        private static GoalRepository GoalRepo { get; set; }
-        private static LastNameRepository LastNameRepo { get; set; }
-        private static LeagueRepository LeagueRepo { get; set; }
-        private static MatchRepository MatchRepo { get; set; }
-        private static NationRepository NationRepo { get; set; }
-        private static NickNameRepository NickNameRepo { get; set; }
-        private static PlayerRepository PlayerRepo { get; set; }
-        private static SeasonRepository SeasonRepo { get; set; }
-        private static TeamRepository TeamRepo { get; set; }
+        private GeneralRepository GeneralRepo { get; set; }        
+        private CityRepository CityRepo { get; set; }
+        private FirstNameRepository FirstNameRepo { get; set; }
+        private GoalRepository GoalRepo { get; set; }
+        private LastNameRepository LastNameRepo { get; set; }
+        private LeagueRepository LeagueRepo { get; set; }
+        private MatchRepository MatchRepo { get; set; }
+        private NationRepository NationRepo { get; set; }
+        private NickNameRepository NickNameRepo { get; set; }
+        private PlayerRepository PlayerRepo { get; set; }
+        private SeasonRepository SeasonRepo { get; set; }
+        private TeamRepository TeamRepo { get; set; }
+
+        private IRepositoryLocator _repositoryLocator { get; set; }
 
         public List<Nation> Nations
         {
@@ -76,10 +78,10 @@ namespace OffseasonGM.Assets.Managers
             }
         }
 
-        public GameManager(string dbPath)
+        public GameManager(IRepositoryLocator repositoryLocator, string dbPath)
         {
             _dbPath = dbPath;
-            InitializeRepositories();
+            _repositoryLocator = repositoryLocator;
             SetNamesForNations();
         }       
         
@@ -208,19 +210,11 @@ namespace OffseasonGM.Assets.Managers
 
         private void InitializeRepositories()
         {
-            GeneralRepo = new GeneralRepository(_dbPath);
-
-            NationRepo = new NationRepository(_dbPath);
-            NickNameRepo = new NickNameRepository(_dbPath);
-            CityRepo = new CityRepository(_dbPath);
-            FirstNameRepo = new FirstNameRepository(_dbPath);
-            GoalRepo = new GoalRepository(_dbPath);
-            LastNameRepo = new LastNameRepository(_dbPath);
-            LeagueRepo = new LeagueRepository(_dbPath);
-            MatchRepo = new MatchRepository(_dbPath);
-            PlayerRepo = new PlayerRepository(_dbPath);
-            SeasonRepo = new SeasonRepository(_dbPath);
-            TeamRepo = new TeamRepository(_dbPath);
+            CityRepo = _repositoryLocator.Resolve<City>(_dbPath) as CityRepository;
+            FirstNameRepo = _repositoryLocator.Resolve<FirstName>(_dbPath) as FirstNameRepository;
+            LastNameRepo = _repositoryLocator.Resolve<LastName>(_dbPath) as LastNameRepository;
+            NationRepo = _repositoryLocator.Resolve<Nation>(_dbPath) as NationRepository;
+            NickNameRepo = _repositoryLocator.Resolve<NickName>(_dbPath) as NickNameRepository;
         }
     }
 }

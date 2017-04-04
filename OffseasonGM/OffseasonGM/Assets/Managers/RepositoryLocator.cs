@@ -31,9 +31,9 @@ namespace OffseasonGM.Assets.Managers
             repositories[typeof(T)] = (dbPath) => repositoryResolver(dbPath);
         }
 
-        public T Resolve<T>(string dbPath)
+        public IRepository Resolve<T>(string dbPath)
         {
-            return (T)repositories[typeof(T)](dbPath);
+            return repositories[typeof(T)](dbPath);
         }
     }
 }

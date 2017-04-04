@@ -10,6 +10,6 @@ namespace OffseasonGM.Assets.Managers
     public interface IRepositoryLocator
     {
         void Register<T>(Func<string, IRepository> repositoryResolver);
-        T Resolve<T>(string dbPath);        
+        IRepository Resolve<T>(string dbPath);        
     }
 }
