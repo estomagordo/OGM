@@ -1,4 +1,5 @@
-﻿using OffseasonGM.Global;
+﻿using OffseasonGM.Extensions;
+using OffseasonGM.Global;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System;
@@ -144,7 +145,7 @@ namespace OffseasonGM.Models
             {
                 alternateTeamList.Add(team);
             }
-            ShuffleList(alternateTeamList);
+            alternateTeamList.Shuffle();
 
             while (alternateTeamList.Any(team => team.AwayGames.Count % 41 > 0 || team.HomeGames.Count % 41 > 0))
             {
@@ -264,21 +265,6 @@ namespace OffseasonGM.Models
                     : Configuration == LeagueConfiguration.Teams31Divisions4
                         ? new int[] { 7, 8, 8, 8 }
                         : new int[] { 8, 8, 8, 8 };
-        }
-
-        private void ShuffleList<T>(List<T> list)
-        {
-            for (var i = 0; i < list.Count; i++)
-            {
-                Swap(list, i, GlobalObjects.Random.Next(i, list.Count));
-            }
-        }
-
-        private void Swap<T>(List<T> list, int i, int j)
-        {
-            var temp = list[i];
-            list[i] = list[j];
-            list[j] = temp;
-        }
+        }        
     }
 }

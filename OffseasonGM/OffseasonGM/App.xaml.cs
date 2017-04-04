@@ -1,4 +1,5 @@
 ﻿using OffseasonGM.Assets.Repositories;
+using OffseasonGM.Extensions;
 using OffseasonGM.Global;
 using OffseasonGM.Models;
 using System;
@@ -169,8 +170,8 @@ namespace OffseasonGM
             var cities = CityRepo.GetRandomSelection(n);
             var nickNames = NickNameRepo.GetRandomSelection(n);
 
-            ShuffleList(cities);
-            ShuffleList(nickNames);
+            cities.Shuffle();
+            nickNames.Shuffle();
 
             return Enumerable.Range(0, n).Select(num => new Team(cities[num], nickNames[num])).ToList();
         }
@@ -228,21 +229,6 @@ namespace OffseasonGM
             var lastName = GetRandomLastNameForNation(nation);
 
             return (nation, firstName, lastName);
-        }
-
-        private void ShuffleList<T>(List<T> list)
-        {
-            for (var i = 0; i < list.Count; i++)
-            {
-                Swap(list, i, GlobalObjects.Random.Next(i, list.Count));
-            }
-        }
-
-        private void Swap<T>(List<T> list, int i, int j)
-        {
-            var temp = list[i];
-            list[i] = list[j];
-            list[j] = temp;
         }
     }
 }
