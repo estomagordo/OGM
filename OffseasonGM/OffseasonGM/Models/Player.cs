@@ -194,7 +194,7 @@ namespace OffseasonGM.Models
                 _stableStatMean * GlobalObjects.Random.NextGaussian());
         }
 
-        public void HaveBirthday(Random random)
+        public void HaveBirthday()
         {
             var baseChangeFactor = Age >= PeakAge
                 ? DeclineSpeed
@@ -202,15 +202,15 @@ namespace OffseasonGM.Models
 
             Age++;
 
-            Defense += baseChangeFactor * random.NextDouble() * 2.0;
-            Endurance += baseChangeFactor * random.NextDouble() * 2.0;
-            Fitness += baseChangeFactor * random.NextDouble() * 2.0;
-            Passing += baseChangeFactor * random.NextDouble() * 2.0;
-            PuckControl += baseChangeFactor * random.NextDouble() * 2.0;
-            ReboundControl += baseChangeFactor * random.NextDouble() * 2.0;
-            Saving += baseChangeFactor * random.NextDouble() * 2.0;
-            Shooting += baseChangeFactor * random.NextDouble() * 2.0;
-            Skating += baseChangeFactor * random.NextDouble() * 2.0;
+            Defense += baseChangeFactor * GlobalObjects.Random.NextDouble() * 2.0;
+            Endurance += baseChangeFactor * GlobalObjects.Random.NextDouble() * 2.0;
+            Fitness += baseChangeFactor * GlobalObjects.Random.NextDouble() * 2.0;
+            Passing += baseChangeFactor * GlobalObjects.Random.NextDouble() * 2.0;
+            PuckControl += baseChangeFactor * GlobalObjects.Random.NextDouble() * 2.0;
+            ReboundControl += baseChangeFactor * GlobalObjects.Random.NextDouble() * 2.0;
+            Saving += baseChangeFactor * GlobalObjects.Random.NextDouble() * 2.0;
+            Shooting += baseChangeFactor * GlobalObjects.Random.NextDouble() * 2.0;
+            Skating += baseChangeFactor * GlobalObjects.Random.NextDouble() * 2.0;
 
             if (Age == RetireAge)
             {

@@ -1,4 +1,5 @@
-﻿using SQLite.Net.Attributes;
+﻿using OffseasonGM.Global;
+using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,14 @@ namespace OffseasonGM.Models
         [OneToMany]
         public List<Season> Seasons { get; set; }
 
+        public Season CurrentSeason
+        {
+            get
+            {
+                return Seasons.Last();
+            }
+        }
+
         public League(LeagueConfiguration configuration, int startYear)
         {            
             StartYear = startYear;
@@ -66,6 +75,23 @@ namespace OffseasonGM.Models
         }
 
         public void PlaySeason()
+        {
+            PlayInterConferentialGames();
+
+            PlayDivisionalNeighbourGames(WesternConference);
+            PlayDivisionalNeighbourGames(EasternConference);
+
+            foreach (var division in WesternConference)
+            {
+                PlayIntraDivisionalGames(division);
+            }
+            foreach (var division in EasternConference)
+            {
+                PlayIntraDivisionalGames(division);
+            }
+        }
+
+        private void PlayInterConferentialGames()
         {
             foreach (var westernDivision in WesternConference)
             {
@@ -83,11 +109,72 @@ namespace OffseasonGM.Models
             }
         }
 
+        private void PlayDivisionalNeighbourGames(List<Division> conference)
+        {
+            var firstHasMoreHomeGames =  GlobalObjects.Random.Next(2) == 0;
+            for (var i = 0; i < conference.Count - 1; i++)
+            {                
+                for (var j = i+1; j < conference.Count; j++)
+                {
+                    foreach (var iTeam in conference[i].Teams)
+                    {
+                        foreach (var jTeam in conference[j].Teams)
+                        {
+                            PlayGame(iTeam, jTeam);
+                            PlayGame(jTeam, iTeam);
+                            if (firstHasMoreHomeGames)
+                            {
+                                PlayGame(iTeam, jTeam);
+                            }
+                            else
+                            {
+                                PlayGame(jTeam, iTeam);
+                            }
+                            firstHasMoreHomeGames = !firstHasMoreHomeGames;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void PlayIntraDivisionalGames(Division division)
+        {
+            var alternateTeamList = new List<Team>();
+            foreach (var team in division.Teams)
+            {
+                alternateTeamList.Add(team);
+            }
+            ShuffleList(alternateTeamList);
+
+            while (alternateTeamList.Any(team => team.AwayGames.Count % 41 > 0 || team.HomeGames.Count % 41 > 0))
+            {
+                for (var i = 0; i < alternateTeamList.Count - 1; i++)
+                {
+                    var iTeam = alternateTeamList[i];
+                    for (var j = 0; j < alternateTeamList.Count; j++)
+                    {
+                        var jTeam = alternateTeamList[j];
+                        var iHasMoreHomeGames = iTeam.HomeGames.Count > jTeam.HomeGames.Count;
+                        var equalAmountOfHomeGamesAndTails = iTeam.HomeGames.Count == jTeam.HomeGames.Count && GlobalObjects.Random.Next(2) == 0;
+
+                        if (iHasMoreHomeGames || equalAmountOfHomeGamesAndTails)
+                        {
+                            PlayGame(jTeam, iTeam);
+                        }
+                        else
+                        {
+                            PlayGame(iTeam, jTeam);
+                        }
+                    }
+                }
+            }
+        }
+
         private void PlayGame(Team home, Team away)
         {
             var match = new Match(Id, home, away);
             match.PlayGame();
-            season.Matches.Add(match);
+            CurrentSeason.Matches.Add(match);
         }
 
         private void CreateDivisions()
@@ -177,6 +264,21 @@ namespace OffseasonGM.Models
                     : Configuration == LeagueConfiguration.Teams31Divisions4
                         ? new int[] { 7, 8, 8, 8 }
                         : new int[] { 8, 8, 8, 8 };
+        }
+
+        private void ShuffleList<T>(List<T> list)
+        {
+            for (var i = 0; i < list.Count; i++)
+            {
+                Swap(list, i, GlobalObjects.Random.Next(i, list.Count));
+            }
+        }
+
+        private void Swap<T>(List<T> list, int i, int j)
+        {
+            var temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
         }
     }
 }
