@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OffseasonGM.Assets.Repositories
 {
-    public class GoalRepository
+    public class GoalRepository : IRepository
     {
         SQLiteConnection connection;
 

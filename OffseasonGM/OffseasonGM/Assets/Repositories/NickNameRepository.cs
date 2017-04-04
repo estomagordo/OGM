@@ -13,7 +13,7 @@ using OffseasonGM.Global;
 
 namespace OffseasonGM.Assets.Repositories
 {
-    public class NickNameRepository
+    public class NickNameRepository : IRepository
     {
         SQLiteConnection connection;
         List<NickName> nickNames;

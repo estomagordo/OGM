@@ -13,7 +13,7 @@ using OffseasonGM.Global;
 
 namespace OffseasonGM.Assets.Repositories
 {
-    public class CityRepository
+    public class CityRepository : IRepository
     {
         SQLiteConnection connection;
         List<City> cities;

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OffseasonGM.Assets.Repositories
 {
-    public class TeamRepository
+    public class TeamRepository : IRepository
     {
         SQLiteConnection connection;
 

@@ -12,7 +12,7 @@ using System.IO;
 
 namespace OffseasonGM.Assets.Repositories
 {
-    public class FirstNameRepository
+    public class FirstNameRepository : IRepository
     {
         SQLiteConnection connection;
         List<Nation> nations;   

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OffseasonGM.Assets.Repositories
 {
-    public class NationRepository
+    public class NationRepository : IRepository
     {
         SQLiteConnection connection;
         List<Nation> nations;

@@ -3,7 +3,7 @@ using SQLite.Net;
 
 namespace OffseasonGM.Assets.Repositories
 {
-    public class GeneralRepository
+    public class GeneralRepository : IRepository
     {
         SQLiteConnection connection;
 

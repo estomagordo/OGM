@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OffseasonGM.Assets.Repositories
 {
-    public class DivisionRepository
+    public class DivisionRepository : IRepository
     {
         SQLiteConnection connection;
 
