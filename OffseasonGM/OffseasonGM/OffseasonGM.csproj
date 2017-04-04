@@ -38,6 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Assets\Managers\GameManager.cs" />
     <Compile Include="Assets\Repositories\CityRepository.cs" />
     <Compile Include="Assets\Repositories\DivisionRepository.cs" />
     <Compile Include="Assets\Repositories\FirstNameRepository.cs" />
