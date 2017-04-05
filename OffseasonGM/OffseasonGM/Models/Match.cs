@@ -209,11 +209,7 @@ namespace OffseasonGM.Models
                     ? 1
                     : 2;
 
-            var assisters = GetAssisters(assistCount,
-                                         homeAttacks ? HomeTeam : AwayTeam,
-                                         shooter,
-                                         homeAttacks ? _homePair : _awayPair,
-                                         homeAttacks ? _homeLine : _awayLine);
+            var assisters = GetAssisters(assistCount, shooter, homeAttacks);
 
             var goal = new Goal(homeAttacks ? HomeTeam : AwayTeam,
                                 _periodNumber,
@@ -308,11 +304,17 @@ namespace OffseasonGM.Models
             return shooter.Shooting * GlobalObjects.Random.NextDouble() > keeper.Saving * GlobalObjects.Random.NextDouble() * 6.0;
         }
 
-        private List<Player> GetAssisters(int assisterCount, Team team, Player scorer, int pair, int line)
+        private List<Player> GetAssisters(int assisterCount, Player scorer, bool homeAttacks)
         {
+            var team = homeAttacks ? HomeTeam : AwayTeam;
+            var goalie = homeAttacks ? awayGoalie : homeGoalie;
+            var pair = homeAttacks ? _awayPair : _homePair;
+            var line = homeAttacks ? _awayLine : _homeLine;
+
             var assisters = new List<Player>();            
 
-            var players = new List<Player> { team.DefenseManOrdering[pair * 2],
+            var players = new List<Player> { goalie,
+                                             team.DefenseManOrdering[pair * 2],
                                              team.DefenseManOrdering[pair * 2 + 1],
                                              team.CenterOrdering[line],
                                              team.LeftWingOrdering[line],
@@ -321,7 +323,7 @@ namespace OffseasonGM.Models
 
             for (var i = 0; i < assisterCount; i++)
             {
-                var totalPassing = players.Sum(player => (player.Position == Player.PlayerPosition.Defenseman ? 0.5 : 1.0) * player.Passing);
+                var totalPassing = players.Sum(player => (player.PassingContribution));
                 var passingRoll = GlobalObjects.Random.NextDouble() * totalPassing;
                 var cumulativePassing = 0.0;
 

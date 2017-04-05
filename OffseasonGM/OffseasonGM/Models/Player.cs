@@ -99,6 +99,13 @@ namespace OffseasonGM.Models
         public bool Retired { get; set; }
 
         [Ignore]
+        public double PassingContribution => Position == PlayerPosition.Goalie
+            ? Passing * 0.01
+            : Position == PlayerPosition.Defenseman
+                ? Passing * 0.5
+                : Passing;
+
+        [Ignore]
         public double Overall
         {
             get
