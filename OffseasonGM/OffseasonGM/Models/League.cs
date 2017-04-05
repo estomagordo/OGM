@@ -184,27 +184,25 @@ namespace OffseasonGM.Models
                     for (var j = i+1; j < alternateTeamList.Count; j++)
                     {
                         var jTeam = alternateTeamList[j];
-                        var iHasMoreHomeGames = iTeam.HomeGames.Count > jTeam.HomeGames.Count;
-                        var equalAmountOfHomeGamesAndTails = iTeam.HomeGames.Count == jTeam.HomeGames.Count && GlobalObjects.Random.Next(2) == 0;
+                        var iHasFewerHomeGames = iTeam.HomeGames.Count < jTeam.HomeGames.Count;
+                        var equalAmountOfHomeGames = iTeam.HomeGames.Count == jTeam.HomeGames.Count;
+                        var tails = GlobalObjects.Random.Next(2) == 0;
+                        var iPreferedHomeTeam = iHasFewerHomeGames || (equalAmountOfHomeGames && tails);
 
                         var iHasHomeGamesRemaining = iTeam.HomeGames.Count % 41 > 0;
                         var iHasAwayGamesRemaining = iTeam.AwayGames.Count % 41 > 0;
                         var jHasHomeGamesRemaining = jTeam.HomeGames.Count % 41 > 0;
                         var jHasAwayGamesRemaining = jTeam.AwayGames.Count % 41 > 0;
+                        var canPlayIJ = iHasHomeGamesRemaining && jHasAwayGamesRemaining;
+                        var canPlayJI = jHasHomeGamesRemaining && iHasAwayGamesRemaining;
 
-                        if (iHasMoreHomeGames || equalAmountOfHomeGamesAndTails)
+                        if (canPlayIJ && (iPreferedHomeTeam || !canPlayJI))
                         {
-                            if (jHasHomeGamesRemaining && iHasAwayGamesRemaining)
-                            {
-                                PlayGame(jTeam, iTeam);
-                            }                            
+                            PlayGame(iTeam, jTeam);
                         }
-                        else
+                        else if (canPlayJI)
                         {
-                            if (iHasHomeGamesRemaining && jHasAwayGamesRemaining)
-                            {
-                                PlayGame(iTeam, jTeam);
-                            }                            
+                            PlayGame(jTeam, iTeam);
                         }
                     }
                 }
