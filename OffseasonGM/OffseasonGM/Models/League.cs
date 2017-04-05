@@ -103,9 +103,19 @@ namespace OffseasonGM.Models
             foreach (var team in Teams)
             {
                 team.Seasons.Add(lastSeason);
+                var playersToRetire = new List<Player>();
                 foreach (var player in team.Players)
                 {
                     player.Seasons.Add(lastSeason);
+                    player.HaveBirthday();
+                    if (player.Retired)
+                    {
+                        playersToRetire.Add(player);
+                    }
+                }
+                foreach (var player in playersToRetire)
+                {
+                    team.Players.Remove(player);
                 }
             }
         }

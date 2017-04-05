@@ -18,6 +18,9 @@ namespace OffseasonGM.Assets.Managers
         private Dictionary<Nation, (List<FirstName> firstNames, List<LastName> lastNames)> _nationNames;
         private League _league;
         private string _dbPath;
+        private const int _fullTeamGoalieCount = 4;
+        private const int _fullTeamDefensemanCount = 10;
+        private const int _fullTeamForwardPositionCount = 7;
 
         private GeneralRepository GeneralRepo { get; set; }        
         private CityRepository CityRepo { get; set; }
@@ -105,13 +108,19 @@ namespace OffseasonGM.Assets.Managers
             var season = new Season(startYear);
             _league.Seasons.Add(season);            
             _league.PlaySeason();
+
+            foreach (var team in Teams)
+            {
+                FillUpPlayersForTeam(team, false);
+                team.ArrangeBestTeam();
+            }            
         }
 
         private void SetupTeams()
         {
             foreach (var team in Teams)
-            {   
-                AddPlayersToNewTeam(team);
+            {
+                FillUpPlayersForTeam(team, true);
                 team.ArrangeBestTeam();
             }
         }
@@ -127,37 +136,48 @@ namespace OffseasonGM.Assets.Managers
             return Enumerable.Range(0, n).Select(num => new Team(cities[num], nickNames[num])).ToList();
         }
 
-        private void AddPlayersToNewTeam(Team team)
+        private void FillUpPlayersForTeam(Team team, bool autoAge)
         {
-            for (var i = 0; i < 3; i++)
+            var goalieCount = team.Players.Count(player => player.Position == Player.PlayerPosition.Goalie);
+            var defenseManCount = team.Players.Count(player => player.Position == Player.PlayerPosition.Defenseman);
+            var centerCount = team.Players.Count(player => player.Position == Player.PlayerPosition.Center);
+            var leftWingCount = team.Players.Count(player => player.Position == Player.PlayerPosition.LeftWing);
+            var rightWingCount = team.Players.Count(player => player.Position == Player.PlayerPosition.RightWing);
+
+            for (var i = goalieCount; i < _fullTeamGoalieCount; i++)
             {
                 var nationAndNames = GetPlayerNationAndNames();
                 var goalie = new Player(18, Player.PlayerPosition.Goalie, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
                 team.Players.Add(goalie);
             }
-            for (var i = 0; i < 8; i++)
+            for (var i = defenseManCount; i < _fullTeamDefensemanCount; i++)
             {
                 var nationAndNames = GetPlayerNationAndNames();
                 var defenseman = new Player(18, Player.PlayerPosition.Defenseman, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
                 team.Players.Add(defenseman);
             }
-            for (var i = 0; i < 5; i++)
+            for (var i = centerCount; i < _fullTeamForwardPositionCount; i++)
             {
                 var nationAndNames = GetPlayerNationAndNames();
                 var center = new Player(18, Player.PlayerPosition.Center, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
                 team.Players.Add(center);
             }
-            for (var i = 0; i < 5; i++)
+            for (var i = leftWingCount; i < _fullTeamForwardPositionCount; i++)
             {
                 var nationAndNames = GetPlayerNationAndNames();
                 var leftWing = new Player(18, Player.PlayerPosition.LeftWing, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
                 team.Players.Add(leftWing);
             }
-            for (var i = 0; i < 5; i++)
+            for (var i = rightWingCount; i < _fullTeamForwardPositionCount; i++)
             {
                 var nationAndNames = GetPlayerNationAndNames();
                 var rightWing = new Player(18, Player.PlayerPosition.RightWing, nationAndNames.nation, nationAndNames.firstName, nationAndNames.lastName);
                 team.Players.Add(rightWing);
+            }
+
+            if (!autoAge)
+            {
+                return;
             }
 
             foreach (var player in team.Players)
