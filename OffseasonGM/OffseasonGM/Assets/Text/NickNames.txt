@@ -1,24 +1,33 @@
 Abandoned
+Archers
+Bandits
 Bashers
 Binary
 Boomerangs
 Boulders
 Caged
 Chaos
+Chasers
+Chiefs
 Clinchers
 Clowns
 Conjurers
 Cougars
 Creepers
 Crushers
+Demigods
 Desperados
 Disorder
 Elementals
 Endless Pits
+Enraged Polar Bears
+Everblades
 Fabulous
 Firefighters
+Flak
 Fury
 Gentle Librarians
+Gonnabes
 Gouged
 Grammar Nazis
 Hermits
@@ -26,26 +35,35 @@ Huggers
 Hyenas
 Hyperdrive
 Ionized
+Javelins
 Juice
+Knockout
 Lackeys
 Lemmas
 Limbo
 Lost Navigators
 Major
+Marauders
 Minutemen
 Moat Surfers
+Mohawks
 Mountaineers
 Mutants
 Mystique
+Neckbeards
 Neon
 Nutmeg
+Offenders
 Pickaxes
+Pixies
 Plasma
 Porcupines
 Prancers
 Pristine
+Pucksmiths
 Pugilists
 Purple Swift
+Quicksand
 Rainbows
 Razed
 Rough Riders
@@ -59,6 +77,7 @@ Sons of the Revolution
 Spacemen
 Stillwater
 Stonemen
+Storm Giants
 Tanned
 Tomfoolery
 Uppercuts
