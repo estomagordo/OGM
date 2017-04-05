@@ -222,6 +222,15 @@ namespace OffseasonGM.Models
                                 assisters);
 
             Goals.Add(goal);
+            shooter.Goals.Add(goal);
+            if (assistCount > 0)
+            {
+                assisters.First().FirstAssists.Add(goal);
+                if (assistCount == 2)
+                {
+                    assisters.Last().SecondAssists.Add(goal);
+                }
+            }
         }
 
         private bool LeavesDangerousRebound(Player goalie, Player shooter)
