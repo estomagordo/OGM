@@ -331,7 +331,7 @@ namespace OffseasonGM.Models
 
                 foreach (var player in players)
                 {
-                    cumulativePassing += (player.Position == Player.PlayerPosition.Defenseman ? 0.5 : 1.0) * player.Passing;
+                    cumulativePassing += (player.PassingContribution);
                     if (passingRoll < cumulativePassing)
                     {
                         assister = player;
