@@ -95,15 +95,15 @@ namespace OffseasonGM.Assets.Managers
         {
             var teams = CreateTeams(30);            
             _league.Teams = teams;
-            _league.FillDivisions();            
+            _league.FillDivisions();
+            SetupTeams();
         }
 
         public void PlaySeason()
         {
             var startYear = _league.StartYear + _league.Seasons.Count();
             var season = new Season(startYear);
-            _league.Seasons.Add(season);
-            SetupTeams();
+            _league.Seasons.Add(season);            
             _league.PlaySeason();
         }
 
