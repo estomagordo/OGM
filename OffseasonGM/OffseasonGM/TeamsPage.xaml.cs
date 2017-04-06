@@ -69,7 +69,7 @@ namespace OffseasonGM
             foreach (var goalie in CurrentTeam.GoalieOrdering.Take(2))
             {
                 var positionLabel = new Label { Text = Assets.Resources.Default.G, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(goalie.Nation)) };
+                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(goalie.Nation)), BackgroundColor = Color.Black };
                 var nameLabel = new Label { Text = goalie.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
 
                 PlayerGrid.Children.Add(positionLabel, 0, rowCount);
@@ -82,7 +82,7 @@ namespace OffseasonGM
             foreach (var defenseman in CurrentTeam.DefenseManOrdering.Take(6))
             {
                 var positionLabel = new Label { Text = Assets.Resources.Default.D, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(defenseman.Nation)) };
+                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(defenseman.Nation)), BackgroundColor = Color.Black };
                 var nameLabel = new Label { Text = defenseman.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
 
                 PlayerGrid.Children.Add(positionLabel, 0, rowCount);
@@ -95,7 +95,7 @@ namespace OffseasonGM
             foreach (var center in CurrentTeam.CenterOrdering.Take(4))
             {
                 var positionLabel = new Label { Text = Assets.Resources.Default.C, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(center.Nation)) };
+                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(center.Nation)), BackgroundColor = Color.Black };
                 var nameLabel = new Label { Text = center.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
 
                 PlayerGrid.Children.Add(positionLabel, 0, rowCount);
@@ -108,7 +108,7 @@ namespace OffseasonGM
             foreach (var leftWing in CurrentTeam.LeftWingOrdering.Take(4))
             {
                 var positionLabel = new Label { Text = Assets.Resources.Default.LW, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(leftWing.Nation)) };
+                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(leftWing.Nation)), BackgroundColor = Color.Black };
                 var nameLabel = new Label { Text = leftWing.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
 
                 PlayerGrid.Children.Add(positionLabel, 0, rowCount);
@@ -121,7 +121,7 @@ namespace OffseasonGM
             foreach (var rightWing in CurrentTeam.RightWingOrdering.Take(4))
             {
                 var positionLabel = new Label { Text = Assets.Resources.Default.RW, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(rightWing.Nation)) };
+                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(rightWing.Nation)), BackgroundColor = Color.Black };
                 var nameLabel = new Label { Text = rightWing.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
 
                 PlayerGrid.Children.Add(positionLabel, 0, rowCount);
