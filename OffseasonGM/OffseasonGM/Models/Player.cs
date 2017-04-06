@@ -124,6 +124,27 @@ namespace OffseasonGM.Models
             }
         }
 
+        [Ignore]
+        public string ShortPosition
+        {
+            get
+            {
+                switch (Position)
+                {
+                    case PlayerPosition.Goalie:
+                        return Assets.Resources.Default.G;                        
+                    case PlayerPosition.Defenseman:
+                        return Assets.Resources.Default.D;                        
+                    case PlayerPosition.Center:
+                        return Assets.Resources.Default.C;
+                    case PlayerPosition.LeftWing:
+                        return Assets.Resources.Default.LW;
+                    default:
+                        return Assets.Resources.Default.RW;
+                }
+            }
+        }
+
         public Player(int age, PlayerPosition position, Nation nation, FirstName firstName, LastName lastName)
         {
             Nation = nation;

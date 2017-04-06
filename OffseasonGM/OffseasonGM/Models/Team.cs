@@ -55,6 +55,21 @@ namespace OffseasonGM.Models
         public List<Player> LeftWingOrdering { get; set; }
         [Ignore]
         public List<Player> RightWingOrdering { get; set; }
+
+        [Ignore]
+        public List<Player> Lineup
+        {
+            get
+            {
+                return  GoalieOrdering.Take(2).Concat(
+                        DefenseManOrdering.Take(6).Concat(
+                        CenterOrdering.Take(4).Concat(
+                        LeftWingOrdering.Take(4).Concat(
+                        RightWingOrdering.Take(4)))))
+                        .ToList();
+            }
+        }
+
         [Ignore]
         public Season LatestSeason
         {

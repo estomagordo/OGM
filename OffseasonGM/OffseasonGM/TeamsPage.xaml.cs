@@ -58,77 +58,16 @@ namespace OffseasonGM
 
         private void FillPlayerGrid()
         {            
-            var assembly = typeof(MainPage).GetTypeInfo().Assembly;
-            foreach (var res in assembly.GetManifestResourceNames())
+            for (var i = 0; i < CurrentTeam.Lineup.Count; i++)
             {
-                System.Diagnostics.Debug.WriteLine("found resource: " + res);
-            }
+                var player = CurrentTeam.Lineup[i];
+                var positionLabel = new Label { Text = player.ShortPosition, TextColor = Color.White, BackgroundColor = Color.Black };
+                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(player.Nation)), BackgroundColor = Color.Black };
+                var nameLabel = new Label { Text = player.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
 
-            var rowCount = 0;
-
-            foreach (var goalie in CurrentTeam.GoalieOrdering.Take(2))
-            {
-                var positionLabel = new Label { Text = Assets.Resources.Default.G, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(goalie.Nation)), BackgroundColor = Color.Black };
-                var nameLabel = new Label { Text = goalie.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
-
-                PlayerGrid.Children.Add(positionLabel, 0, rowCount);
-                PlayerGrid.Children.Add(flag, 1, rowCount);
-                PlayerGrid.Children.Add(nameLabel, 2, rowCount);
-
-                rowCount++;
-            }
-
-            foreach (var defenseman in CurrentTeam.DefenseManOrdering.Take(6))
-            {
-                var positionLabel = new Label { Text = Assets.Resources.Default.D, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(defenseman.Nation)), BackgroundColor = Color.Black };
-                var nameLabel = new Label { Text = defenseman.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
-
-                PlayerGrid.Children.Add(positionLabel, 0, rowCount);
-                PlayerGrid.Children.Add(flag, 1, rowCount);
-                PlayerGrid.Children.Add(nameLabel, 2, rowCount);
-
-                rowCount++;
-            }
-
-            foreach (var center in CurrentTeam.CenterOrdering.Take(4))
-            {
-                var positionLabel = new Label { Text = Assets.Resources.Default.C, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(center.Nation)), BackgroundColor = Color.Black };
-                var nameLabel = new Label { Text = center.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
-
-                PlayerGrid.Children.Add(positionLabel, 0, rowCount);
-                PlayerGrid.Children.Add(flag, 1, rowCount);
-                PlayerGrid.Children.Add(nameLabel, 2, rowCount);
-
-                rowCount++;
-            }
-
-            foreach (var leftWing in CurrentTeam.LeftWingOrdering.Take(4))
-            {
-                var positionLabel = new Label { Text = Assets.Resources.Default.LW, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(leftWing.Nation)), BackgroundColor = Color.Black };
-                var nameLabel = new Label { Text = leftWing.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
-
-                PlayerGrid.Children.Add(positionLabel, 0, rowCount);
-                PlayerGrid.Children.Add(flag, 1, rowCount);
-                PlayerGrid.Children.Add(nameLabel, 2, rowCount);
-
-                rowCount++;
-            }
-
-            foreach (var rightWing in CurrentTeam.RightWingOrdering.Take(4))
-            {
-                var positionLabel = new Label { Text = Assets.Resources.Default.RW, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(rightWing.Nation)), BackgroundColor = Color.Black };
-                var nameLabel = new Label { Text = rightWing.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
-
-                PlayerGrid.Children.Add(positionLabel, 0, rowCount);
-                PlayerGrid.Children.Add(flag, 1, rowCount);
-                PlayerGrid.Children.Add(nameLabel, 2, rowCount);
-
-                rowCount++;
+                PlayerGrid.Children.Add(positionLabel, 0, i);
+                PlayerGrid.Children.Add(flag, 1, i);
+                PlayerGrid.Children.Add(nameLabel, 2, i);
             }
         }
 
