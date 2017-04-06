@@ -53,9 +53,9 @@ namespace OffseasonGM.Assets.Repositories
         private void SeedLastNames()
         {
             var assembly = typeof(MainPage).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream("OffseasonGM.Assets.Text.LastNames.txt");
+            var stream = assembly.GetManifestResourceStream("OffseasonGM.Assets.Text.LastNames.txt");            
             string line;
-            using (var reader = new StreamReader(stream))
+            using (var reader = new StreamReader(stream, Encoding.GetEncoding("Windows-1252")))
             {
                 while ((line = reader.ReadLine()) != null)
                 {

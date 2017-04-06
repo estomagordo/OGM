@@ -231,10 +231,12 @@ namespace OffseasonGM.Assets.Managers
 
         private void InitializeRepositories()
         {
+            GeneralRepo = new GeneralRepository(_dbPath);
+
             CityRepo = _repositoryLocator.Resolve<City>(_dbPath) as CityRepository;
-            FirstNameRepo = _repositoryLocator.Resolve<FirstName>(_dbPath) as FirstNameRepository;
-            LastNameRepo = _repositoryLocator.Resolve<LastName>(_dbPath) as LastNameRepository;
             NationRepo = _repositoryLocator.Resolve<Nation>(_dbPath) as NationRepository;
+            FirstNameRepo = _repositoryLocator.Resolve<FirstName>(_dbPath) as FirstNameRepository;
+            LastNameRepo = _repositoryLocator.Resolve<LastName>(_dbPath) as LastNameRepository;            
             NickNameRepo = _repositoryLocator.Resolve<NickName>(_dbPath) as NickNameRepository;
         }
     }

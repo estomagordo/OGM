@@ -54,7 +54,7 @@ namespace OffseasonGM.Assets.Repositories
             var assembly = typeof(MainPage).GetTypeInfo().Assembly;
             var stream = assembly.GetManifestResourceStream("OffseasonGM.Assets.Text.FirstNames.txt");
             string line;
-            using (var reader = new StreamReader(stream))
+            using (var reader = new StreamReader(stream, Encoding.GetEncoding("Windows-1252")))
             {
                 while ((line = reader.ReadLine()) != null)
                 {
