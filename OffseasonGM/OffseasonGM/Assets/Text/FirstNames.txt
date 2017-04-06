@@ -79,6 +79,7 @@ Jerome|USA|Canada
 Jesse|Finland|USA
 Jim|USA|Canada
 Jimmy|USA|Canada|Sweden
+Joakim|Sweden
 Joel|Finland|Sweden|USA
 Johan|Sweden|Finland
 John|Canada|USA|Sweden
