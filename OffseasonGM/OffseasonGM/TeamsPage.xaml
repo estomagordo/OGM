@@ -10,7 +10,6 @@
                 <Label x:Name="LongTeamNameLabel" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                 <Button Text="&gt;" Clicked="CycleForward" BackgroundColor="Black" TextColor="White" VerticalOptions="Center"/>
             </StackLayout>
-            <Label x:Name="TeamRecordLabel" Text="" TextColor="White"/>
             <Grid x:Name="PlayerGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
