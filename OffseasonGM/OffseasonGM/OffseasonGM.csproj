@@ -159,26 +159,26 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Assets\Images\1491482943_United-States_flat.png" />
-    <Content Include="Assets\Images\1491482952_France_flat.png" />
-    <Content Include="Assets\Images\1491482958_Italy_flat.png" />
-    <Content Include="Assets\Images\1491482963_Canada_flat.png" />
-    <Content Include="Assets\Images\1491482969_Russia_flat.png" />
-    <Content Include="Assets\Images\1491483015_Sweden_flat.png" />
-    <Content Include="Assets\Images\1491483022_Poland_flat.png" />
-    <Content Include="Assets\Images\1491483045_Czech-Republic_flat.png" />
-    <Content Include="Assets\Images\1491483059_Denmark_flat.png" />
-    <Content Include="Assets\Images\1491483070_Japan_flat.png" />
-    <Content Include="Assets\Images\1491483113_Norway_flat.png" />
-    <Content Include="Assets\Images\1491483123_Finland_flat.png" />
-    <Content Include="Assets\Images\1491483136_Switzerland_flat.png" />
-    <Content Include="Assets\Images\1491483151_Slovakia_flat.png" />
-    <Content Include="Assets\Images\1491483172_Austria_flat.png" />
-    <Content Include="Assets\Images\1491483187_Ukraine_flat.png" />
-    <Content Include="Assets\Images\1491483239_Germany_flat.png" />
-    <Content Include="Assets\Images\1491483451_Slovenia_flat.png" />
-    <Content Include="Assets\Images\1491483502_Latvia_flat.png" />
-    <Content Include="Assets\Images\1491483679_Belarus_flat.png" />
+    <Content Include="Assets\Images\USA_flat.png" />
+    <Content Include="Assets\Images\France_flat.png" />
+    <Content Include="Assets\Images\Italy_flat.png" />
+    <Content Include="Assets\Images\Canada_flat.png" />
+    <Content Include="Assets\Images\Russia_flat.png" />
+    <Content Include="Assets\Images\Sweden_flat.png" />
+    <Content Include="Assets\Images\Poland_flat.png" />
+    <Content Include="Assets\Images\Czechia_flat.png" />
+    <Content Include="Assets\Images\Denmark_flat.png" />
+    <Content Include="Assets\Images\Japan_flat.png" />
+    <Content Include="Assets\Images\Norway_flat.png" />
+    <Content Include="Assets\Images\Finland_flat.png" />
+    <Content Include="Assets\Images\Switzerland_flat.png" />
+    <Content Include="Assets\Images\Slovakia_flat.png" />
+    <Content Include="Assets\Images\Austria_flat.png" />
+    <Content Include="Assets\Images\Ukraine_flat.png" />
+    <Content Include="Assets\Images\Germany_flat.png" />
+    <Content Include="Assets\Images\Slovenia_flat.png" />
+    <Content Include="Assets\Images\Latvia_flat.png" />
+    <Content Include="Assets\Images\Belarus_flat.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
