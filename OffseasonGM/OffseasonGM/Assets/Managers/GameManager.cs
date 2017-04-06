@@ -195,7 +195,19 @@ namespace OffseasonGM.Assets.Managers
 
         private Nation GetRandomNation()
         {
-            return Nations[GlobalObjects.Random.Next(Nations.Count)];
+            var nationRoll = GlobalObjects.Random.NextDouble();
+            var accumulated = 0.0;
+
+            foreach (var nation in Nations)
+            {
+                accumulated += nation.Frequency;
+                if (nationRoll < accumulated)
+                {
+                    return nation;
+                }
+            }
+
+            return Nations.Last();
         }
 
         private FirstName GetRandomFirstNameForNation(Nation nation)
