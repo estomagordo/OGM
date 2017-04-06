@@ -20,18 +20,18 @@ namespace OffseasonGM
             manager.CreateLeague(League.LeagueConfiguration.Teams30Divisions4, 2016);
             manager.SetupLeague();
             manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
-            manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
+            //manager.PlaySeason();
 
             MainPage = new TeamsPage(manager.Teams);
         }

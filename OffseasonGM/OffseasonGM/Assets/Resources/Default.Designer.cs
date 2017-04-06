@@ -60,5 +60,50 @@ namespace OffseasonGM.Assets.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C.
+        /// </summary>
+        internal static string C {
+            get {
+                return ResourceManager.GetString("C", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D.
+        /// </summary>
+        internal static string D {
+            get {
+                return ResourceManager.GetString("D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to G.
+        /// </summary>
+        internal static string G {
+            get {
+                return ResourceManager.GetString("G", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LW.
+        /// </summary>
+        internal static string LW {
+            get {
+                return ResourceManager.GetString("LW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RW.
+        /// </summary>
+        internal static string RW {
+            get {
+                return ResourceManager.GetString("RW", resourceCulture);
+            }
+        }
     }
 }
