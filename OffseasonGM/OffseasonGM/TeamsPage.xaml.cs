@@ -68,6 +68,8 @@ namespace OffseasonGM
                 PlayerGrid.Children.Add(positionLabel, 0, i);
                 PlayerGrid.Children.Add(flag, 1, i);
                 PlayerGrid.Children.Add(nameLabel, 2, i);
+
+
             }
         }
 
