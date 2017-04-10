@@ -62,7 +62,7 @@ namespace OffseasonGM
             {
                 var player = CurrentTeam.Lineup[i];
                 var positionLabel = new Label { Text = player.ShortPosition, TextColor = Color.White, BackgroundColor = Color.Black };
-                var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(player.Nation)), BackgroundColor = Color.Black };
+                var flag = new Image { Source = ImageSource.FromResource(player.Nation.FlagUri), BackgroundColor = Color.Black };
                 var nameLabel = new Label { Text = player.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
 
                 var tapGestureRecognizer = new TapGestureRecognizer((s, e) => OnPlayerClicked(player, null));
@@ -90,11 +90,6 @@ namespace OffseasonGM
         private void CycleForward(object sender, EventArgs e)
         {
             currentTeamIndex++;
-        }
-
-        private string ImageResourceNameFromNation(Nation nation)
-        {
-            return string.Format("OffseasonGM.Assets.Images.{0}_flat.png", nation.Name.ToLower());
-        }
+        }        
     }
 }

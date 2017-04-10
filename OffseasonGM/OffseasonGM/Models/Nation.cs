@@ -7,6 +7,8 @@ namespace OffseasonGM.Models
 {    
     public class Nation
     {
+        private const string flagUriFormat = "OffseasonGM.Assets.Images.{0}_flat.png";
+
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
                 
@@ -24,6 +26,14 @@ namespace OffseasonGM.Models
 
         [OneToMany]
         public List<Player> Players { get; set; }
+
+        public string FlagUri
+        {
+            get
+            {                
+                return string.Format(flagUriFormat, Name.ToLower());                
+            }
+        }
 
         public override int GetHashCode()
         {

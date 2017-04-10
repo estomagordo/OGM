@@ -54,7 +54,7 @@ namespace OffseasonGM
         private void RefreshView()
         {
             PositionLabel.Text = CurrentPlayer.ShortPosition;
-            NationFlag.Source = ImageSource.FromResource(ImageResourceNameFromNation(CurrentPlayer.Nation));
+            NationFlag.Source = ImageSource.FromResource(CurrentPlayer.Nation.FlagUri);
             NameLabel.Text = CurrentPlayer.ToString();
         }
 
@@ -71,11 +71,6 @@ namespace OffseasonGM
         private void CycleForward(object sender, EventArgs e)
         {
             CurrentPlayerIndex++;
-        }
-
-        private string ImageResourceNameFromNation(Nation nation)
-        {
-            return string.Format("OffseasonGM.Assets.Images.{0}_flat.png", nation.Name.ToLower());
         }
     }
 }
