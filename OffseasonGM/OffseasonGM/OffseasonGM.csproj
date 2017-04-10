@@ -83,6 +83,9 @@
     <Compile Include="Models\SeasonPlayer.cs" />
     <Compile Include="Models\SeasonTeam.cs" />
     <Compile Include="Models\Team.cs" />
+    <Compile Include="PlayerPage.xaml.cs">
+      <DependentUpon>PlayerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Global\GlobalObjects.cs" />
     <Compile Include="TeamPage.xaml.cs">
@@ -157,7 +160,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Assets\Images\usa_flat.png" />
     <EmbeddedResource Include="Assets\Images\france_flat.png" />
@@ -179,6 +181,12 @@
     <EmbeddedResource Include="Assets\Images\slovenia_flat.png" />
     <EmbeddedResource Include="Assets\Images\latvia_flat.png" />
     <EmbeddedResource Include="Assets\Images\belarus_flat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PlayerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

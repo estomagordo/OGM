@@ -33,7 +33,7 @@ namespace OffseasonGM
             //manager.PlaySeason();
             //manager.PlaySeason();
 
-            MainPage = new TeamPage(manager.Teams);
+            MainPage = new NavigationPage(new TeamPage(manager.Teams));
         }
 
         protected override void OnStart()

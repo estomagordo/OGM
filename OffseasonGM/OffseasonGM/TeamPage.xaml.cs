@@ -65,12 +65,21 @@ namespace OffseasonGM
                 var flag = new Image { Source = ImageSource.FromResource(ImageResourceNameFromNation(player.Nation)), BackgroundColor = Color.Black };
                 var nameLabel = new Label { Text = player.ToString(), TextColor = Color.White, BackgroundColor = Color.Black };
 
+                var tapGestureRecognizer = new TapGestureRecognizer((s, e) => OnPlayerClicked(player, null));
+                nameLabel.GestureRecognizers.Add(tapGestureRecognizer);
+
                 PlayerGrid.Children.Add(positionLabel, 0, i);
                 PlayerGrid.Children.Add(flag, 1, i);
                 PlayerGrid.Children.Add(nameLabel, 2, i);
-
-
             }
+        }
+
+        private async void OnPlayerClicked(object sender, EventArgs e)
+        {
+            var player = sender as Player;
+            var playerIndex = CurrentTeam.Lineup.IndexOf(player);
+
+            await Navigation.PushAsync(new PlayerPage(CurrentTeam, playerIndex));
         }
 
         private void CycleBackward(object sender, EventArgs e)
