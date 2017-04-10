@@ -17,7 +17,7 @@ namespace OffseasonGM
 {
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TeamsPage : ContentPage
+    public partial class TeamPage : ContentPage
     {
         private int _currentTeamIndex;
         private List<Team> teams;
@@ -43,7 +43,7 @@ namespace OffseasonGM
             }
         }
 
-        public TeamsPage(List<Team> teams)
+        public TeamPage(List<Team> teams)
         {
             this.teams = teams;
             InitializeComponent();
