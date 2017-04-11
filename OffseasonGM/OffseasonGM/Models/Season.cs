@@ -25,6 +25,9 @@ namespace OffseasonGM.Models
         public List<Player> Players { get; set; }
 
         [OneToMany]
+        public List<Goal> Goals { get; set; }
+
+        [OneToMany]
         public List<Match> Matches { get; set; }
 
         public Season(int startYear)
@@ -33,6 +36,17 @@ namespace OffseasonGM.Models
             Matches = new List<Match>();
             Players = new List<Player>();
             Teams = new List<Team>();
+        }
+
+        public override string ToString()
+        {
+            var shortNextYearString = ((StartYear + 1) % 100).ToString();
+            if (shortNextYearString.Length == 1)
+            {
+                shortNextYearString = "0" + shortNextYearString;
+            }
+
+            return StartYear.ToString() + "-" + shortNextYearString;
         }
     }
 }

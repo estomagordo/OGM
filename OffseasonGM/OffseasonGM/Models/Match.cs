@@ -113,6 +113,11 @@ namespace OffseasonGM.Models
 
             HomeTeam.HomeGames.Add(this);
             AwayTeam.AwayGames.Add(this);
+
+            foreach (var player in HomeTeam.Lineup.Concat(AwayTeam.Lineup))
+            {
+                player.Matches.Add(this);
+            }
         }
 
         private void PlayPeriod(int periodNumber)
@@ -211,7 +216,9 @@ namespace OffseasonGM.Models
 
             var assisters = GetAssisters(assistCount, shooter, homeAttacks);
 
-            var goal = new Goal(homeAttacks ? HomeTeam : AwayTeam,
+            var goal = new Goal(SeasonId,
+                                Id,
+                                homeAttacks ? HomeTeam : AwayTeam,
                                 _periodNumber,
                                 _second,
                                 shooter,

@@ -16,6 +16,9 @@ namespace OffseasonGM.Models
         [ForeignKey(typeof(Match))]
         public int MatchId { get; set; }
 
+        [ForeignKey(typeof(Season))]
+        public int SeasonId { get; set; }
+
         [ManyToOne("ScorerKey", "Goals")]
         public Player Scorer { get; set; }
 
@@ -37,8 +40,10 @@ namespace OffseasonGM.Models
 
         }
 
-        public Goal(Team team, int period, int seconds, Player scorer, List<Player> assisters)
+        public Goal(int seasonId, int matchId, Team team, int period, int seconds, Player scorer, List<Player> assisters)
         {
+            SeasonId = seasonId;
+            MatchId = matchId;
             Team = team;            
             Period = period;
             Seconds = seconds;

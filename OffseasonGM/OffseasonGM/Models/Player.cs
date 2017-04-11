@@ -145,6 +145,27 @@ namespace OffseasonGM.Models
             }
         }
 
+        [Ignore]
+        public List<(Season season, int matchesPlayed, int goalCount, int assistCount, int pointCount)> SkaterSeasonStats
+        {
+            get
+            {
+                var seasonStats = new List<(Season, int, int, int, int)>();
+
+                foreach (var season in Seasons)
+                {
+                    var matchCount = Matches.Count(match => match.SeasonId == season.Id);
+                    var goalCount = Goals.Count(goal => goal.SeasonId == season.Id);
+                    var assistCount = FirstAssists.Count(assist => assist.SeasonId == season.Id) + SecondAssists.Count(assist => assist.SeasonId == season.Id);
+                    var pointCount = goalCount + assistCount;
+
+                    seasonStats.Add((season, matchCount, goalCount, assistCount, pointCount));
+                }
+
+                return seasonStats;
+            }
+        }
+
         public Player(int age, PlayerPosition position, Nation nation, FirstName firstName, LastName lastName)
         {
             Nation = nation;

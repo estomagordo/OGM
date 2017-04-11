@@ -71,6 +71,15 @@ namespace OffseasonGM.Assets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assists.
+        /// </summary>
+        internal static string Assists {
+            get {
+                return ResourceManager.GetString("Assists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C.
         /// </summary>
         internal static string C {
@@ -125,6 +134,24 @@ namespace OffseasonGM.Assets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Games.
+        /// </summary>
+        internal static string Games {
+            get {
+                return ResourceManager.GetString("Games", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goals.
+        /// </summary>
+        internal static string Goals {
+            get {
+                return ResourceManager.GetString("Goals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LW.
         /// </summary>
         internal static string LW {
@@ -139,6 +166,15 @@ namespace OffseasonGM.Assets.Resources {
         internal static string Passing {
             get {
                 return ResourceManager.GetString("Passing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points.
+        /// </summary>
+        internal static string Points {
+            get {
+                return ResourceManager.GetString("Points", resourceCulture);
             }
         }
         
@@ -175,6 +211,15 @@ namespace OffseasonGM.Assets.Resources {
         internal static string Saving {
             get {
                 return ResourceManager.GetString("Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Season.
+        /// </summary>
+        internal static string Season {
+            get {
+                return ResourceManager.GetString("Season", resourceCulture);
             }
         }
         

@@ -59,11 +59,13 @@ namespace OffseasonGM
             if (CurrentPlayer.Position == Player.PlayerPosition.Goalie)
             {
                 ShowGoalieGrid();
+                ShowGoalieSeasonsGrid();
             }
             else
             {
                 ShowSkaterGrid();
-            }
+                ShowSkaterSeasonsGrid();
+            }            
         }
 
         private void ShowSkaterGrid()
@@ -156,6 +158,60 @@ namespace OffseasonGM
 
             var savingValue = new Label { Text = CurrentPlayer.Saving.ToRoundedString(), TextColor = Color.White, BackgroundColor = Color.Black };
             GoalieAttributeGrid.Children.Add(savingValue, 3, 2);
+        }
+
+        private void ShowSkaterSeasonsGrid()
+        {
+            GoalieSeasonsGrid.IsVisible = false;
+            SkaterSeasonsGrid.IsVisible = true;
+            SkaterSeasonsGrid.Children.Clear();
+            SkaterSeasonsGrid.RowDefinitions.Clear();
+
+            SkaterSeasonsGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+
+            var seasonHeaderLabel = new Label { Text = Assets.Resources.Default.Season, TextColor = Color.White, BackgroundColor = Color.Black };
+            SkaterSeasonsGrid.Children.Add(seasonHeaderLabel, 0, 0);
+
+            var gamesHeaderLabel = new Label { Text = Assets.Resources.Default.Games, TextColor = Color.White, BackgroundColor = Color.Black };
+            SkaterSeasonsGrid.Children.Add(gamesHeaderLabel, 1, 0);
+
+            var goalsHeaderLabel = new Label { Text = Assets.Resources.Default.Goals, TextColor = Color.White, BackgroundColor = Color.Black };
+            SkaterSeasonsGrid.Children.Add(goalsHeaderLabel, 2, 0);
+
+            var assistsHeaderLabel = new Label { Text = Assets.Resources.Default.Assists, TextColor = Color.White, BackgroundColor = Color.Black };
+            SkaterSeasonsGrid.Children.Add(assistsHeaderLabel, 3, 0);
+
+            var pointsHeaderLabel = new Label { Text = Assets.Resources.Default.Points, TextColor = Color.White, BackgroundColor = Color.Black };
+            SkaterSeasonsGrid.Children.Add(pointsHeaderLabel, 4, 0);
+
+            foreach (var seasonStats in CurrentPlayer.SkaterSeasonStats)
+            {
+                SkaterSeasonsGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                var rowCount = SkaterSeasonsGrid.RowDefinitions.Count();
+
+                var seasonLabel = new Label { Text = seasonStats.season.ToString(), BackgroundColor = Color.Black, TextColor = Color.White };
+                SkaterSeasonsGrid.Children.Add(seasonLabel, 0, rowCount - 1);
+
+                var matchesLabel = new Label { Text = seasonStats.matchesPlayed.ToString(), BackgroundColor = Color.Black, TextColor = Color.White };
+                SkaterSeasonsGrid.Children.Add(matchesLabel, 1, rowCount - 1);
+
+                var goalsLabel = new Label { Text = seasonStats.goalCount.ToString(), BackgroundColor = Color.Black, TextColor = Color.White };
+                SkaterSeasonsGrid.Children.Add(goalsLabel, 2, rowCount - 1);
+
+                var assistsLabel = new Label { Text = seasonStats.assistCount.ToString(), BackgroundColor = Color.Black, TextColor = Color.White };
+                SkaterSeasonsGrid.Children.Add(assistsLabel, 3, rowCount - 1);
+
+                var pointsLabel = new Label { Text = seasonStats.pointCount.ToString(), BackgroundColor = Color.Black, TextColor = Color.White };
+                SkaterSeasonsGrid.Children.Add(pointsLabel, 4, rowCount - 1);
+            }
+        }
+
+        private void ShowGoalieSeasonsGrid()
+        {
+            SkaterSeasonsGrid.IsVisible = false;
+            GoalieSeasonsGrid.IsVisible = true;
+            GoalieSeasonsGrid.Children.Clear();
+            GoalieSeasonsGrid.RowDefinitions.Clear();
         }
 
         private async void OnPreviousButtonClicked(object sender, EventArgs e)
