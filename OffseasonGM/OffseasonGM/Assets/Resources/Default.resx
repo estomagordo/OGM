@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
   <data name="C" xml:space="preserve">
     <value>C</value>
     <comment>Center position (short)</comment>
@@ -124,6 +127,15 @@
   <data name="D" xml:space="preserve">
     <value>D</value>
     <comment>Defenseman position (short)</comment>
+  </data>
+  <data name="Defense" xml:space="preserve">
+    <value>Defense</value>
+  </data>
+  <data name="Endurance" xml:space="preserve">
+    <value>Endurance</value>
+  </data>
+  <data name="Fitness" xml:space="preserve">
+    <value>Fitness</value>
   </data>
   <data name="G" xml:space="preserve">
     <value>G</value>
@@ -133,8 +145,26 @@
     <value>LW</value>
     <comment>Left wing position (short)</comment>
   </data>
+  <data name="Passing" xml:space="preserve">
+    <value>Passing</value>
+  </data>
+  <data name="PuckControl" xml:space="preserve">
+    <value>Puck Control</value>
+  </data>
+  <data name="ReboundControl" xml:space="preserve">
+    <value>Rebound Control</value>
+  </data>
   <data name="RW" xml:space="preserve">
     <value>RW</value>
     <comment>Right wing position (short)</comment>
+  </data>
+  <data name="Saving" xml:space="preserve">
+    <value>Saving</value>
+  </data>
+  <data name="Shooting" xml:space="preserve">
+    <value>Shooting</value>
+  </data>
+  <data name="Skating" xml:space="preserve">
+    <value>Skating</value>
   </data>
 </root>

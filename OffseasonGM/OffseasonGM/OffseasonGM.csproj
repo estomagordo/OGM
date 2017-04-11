@@ -60,6 +60,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Default.resx</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\DoubleExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Models\Division.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />

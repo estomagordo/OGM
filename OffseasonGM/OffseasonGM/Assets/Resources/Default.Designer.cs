@@ -62,6 +62,15 @@ namespace OffseasonGM.Assets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Age.
+        /// </summary>
+        internal static string Age {
+            get {
+                return ResourceManager.GetString("Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to C.
         /// </summary>
         internal static string C {
@@ -76,6 +85,33 @@ namespace OffseasonGM.Assets.Resources {
         internal static string D {
             get {
                 return ResourceManager.GetString("D", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Defense.
+        /// </summary>
+        internal static string Defense {
+            get {
+                return ResourceManager.GetString("Defense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Endurance.
+        /// </summary>
+        internal static string Endurance {
+            get {
+                return ResourceManager.GetString("Endurance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fitness.
+        /// </summary>
+        internal static string Fitness {
+            get {
+                return ResourceManager.GetString("Fitness", resourceCulture);
             }
         }
         
@@ -98,11 +134,65 @@ namespace OffseasonGM.Assets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Passing.
+        /// </summary>
+        internal static string Passing {
+            get {
+                return ResourceManager.GetString("Passing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Puck Control.
+        /// </summary>
+        internal static string PuckControl {
+            get {
+                return ResourceManager.GetString("PuckControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rebound Control.
+        /// </summary>
+        internal static string ReboundControl {
+            get {
+                return ResourceManager.GetString("ReboundControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RW.
         /// </summary>
         internal static string RW {
             get {
                 return ResourceManager.GetString("RW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving.
+        /// </summary>
+        internal static string Saving {
+            get {
+                return ResourceManager.GetString("Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shooting.
+        /// </summary>
+        internal static string Shooting {
+            get {
+                return ResourceManager.GetString("Shooting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skating.
+        /// </summary>
+        internal static string Skating {
+            get {
+                return ResourceManager.GetString("Skating", resourceCulture);
             }
         }
     }
