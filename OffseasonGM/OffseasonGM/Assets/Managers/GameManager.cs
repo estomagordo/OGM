@@ -106,6 +106,7 @@ namespace OffseasonGM.Assets.Managers
         {
             var startYear = _league.StartYear + _league.Seasons.Count();
             var season = new Season(startYear);
+            SeasonRepo.Save(season);
             _league.Seasons.Add(season);            
             _league.PlaySeason();
 
@@ -256,6 +257,8 @@ namespace OffseasonGM.Assets.Managers
             LastNameRepo = _repositoryLocator.Resolve<LastName>(_dbPath) as LastNameRepository;            
             NickNameRepo = _repositoryLocator.Resolve<NickName>(_dbPath) as NickNameRepository;
             TeamRepo = _repositoryLocator.Resolve<Team>(_dbPath) as TeamRepository;
+            SeasonRepo = _repositoryLocator.Resolve<Season>(_dbPath) as SeasonRepository;
+            MatchRepo = _repositoryLocator.Resolve<Match>(_dbPath) as MatchRepository;
         }
     }
 }

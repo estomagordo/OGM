@@ -15,12 +15,29 @@ namespace OffseasonGM.Assets.Repositories
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
         }        
 
-        public void UpdateSeason(Season season)
+        public void Save(Season season)
+        {
+            if (season.Id == 0)
+            {
+                Insert(season);
+            }
+            else
+            {
+                Update(season);
+            }
+        }
+
+        private void Update(Season season)
         {
             connection.UpdateWithChildren(season);
         }
 
-        public List<Season> GetAllSeasons()
+        private void Insert(Season season)
+        {
+            connection.Insert(season);
+        }
+
+        public List<Season> GetAll()
         {
             return connection.GetAllWithChildren<Season>();
         }

@@ -14,14 +14,31 @@ namespace OffseasonGM.Assets.Repositories
         public MatchRepository(string dbPath)
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-        }        
+        }
 
-        public void UpdateMatch(Match match)
+        public void Save(Match match)
+        {
+            if (match.Id == 0)
+            {
+                Insert(match);
+            }
+            else
+            {
+                Update(match);
+            }
+        }
+
+        private void Update(Match match)
         {
             connection.UpdateWithChildren(match);
         }
 
-        public List<Match> GetAllMatches()
+        private void Insert(Match match)
+        {
+            connection.Insert(match);
+        }
+
+        public List<Match> GetAll()
         {
             return connection.GetAllWithChildren<Match>();
         }
