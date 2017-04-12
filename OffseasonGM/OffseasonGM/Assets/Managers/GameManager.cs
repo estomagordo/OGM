@@ -263,7 +263,7 @@ namespace OffseasonGM.Assets.Managers
 
         private void PlayGame(Team home, Team away)
         {
-            var match = new Match(_league.Id, home, away);
+            var match = new Match(_league.CurrentSeason.Id, home, away);
             MatchRepo.Save(match);
             match.PlayGame();            
             _league.CurrentSeason.Matches.Add(match);
