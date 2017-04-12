@@ -14,12 +14,29 @@ namespace OffseasonGM.Assets.Repositories
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
         }        
 
-        public void UpdateTeam(Team team)
+        public void Save(Team team)
+        {
+            if (team.Id == 0)
+            {
+                Insert(team);
+            }
+            else
+            {
+                Update(team);
+            }
+        }
+
+        private void Insert(Team team)
+        {
+           connection.Insert(team);
+        }
+
+        private void Update(Team team)
         {
             connection.UpdateWithChildren(team);
         }
 
-        public List<Team> GetAllTeams()
+        public List<Team> GetAll()
         {
             return connection.GetAllWithChildren<Team>();
         }

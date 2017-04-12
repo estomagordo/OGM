@@ -133,7 +133,12 @@ namespace OffseasonGM.Assets.Managers
             cities.Shuffle();
             nickNames.Shuffle();
 
-            return Enumerable.Range(0, n).Select(num => new Team(cities[num], nickNames[num])).ToList();
+            return Enumerable.Range(0, n).Select(num =>
+            {
+                var team = new Team(cities[num], nickNames[num]);
+                TeamRepo.Save(team);
+                return team;
+            }).ToList();
         }
 
         private void FillUpPlayersForTeam(Team team, bool autoAge)
@@ -250,6 +255,7 @@ namespace OffseasonGM.Assets.Managers
             FirstNameRepo = _repositoryLocator.Resolve<FirstName>(_dbPath) as FirstNameRepository;
             LastNameRepo = _repositoryLocator.Resolve<LastName>(_dbPath) as LastNameRepository;            
             NickNameRepo = _repositoryLocator.Resolve<NickName>(_dbPath) as NickNameRepository;
+            TeamRepo = _repositoryLocator.Resolve<Team>(_dbPath) as TeamRepository;
         }
     }
 }
