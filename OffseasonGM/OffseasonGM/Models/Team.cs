@@ -192,5 +192,20 @@ namespace OffseasonGM.Models
         {
             return City.Name + " " + NickName.Name;
         }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Team);
+        }
+
+        public bool Equals(Team team)
+        {
+            return team != null && team.Id == Id;
+        }
     }
 }

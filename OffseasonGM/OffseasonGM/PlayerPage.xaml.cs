@@ -212,6 +212,44 @@ namespace OffseasonGM
             GoalieSeasonsGrid.IsVisible = true;
             GoalieSeasonsGrid.Children.Clear();
             GoalieSeasonsGrid.RowDefinitions.Clear();
+
+            GoalieSeasonsGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+
+            var seasonHeaderLabel = new Label { Text = Assets.Resources.Default.Season, TextColor = Color.White, BackgroundColor = Color.Black };
+            GoalieSeasonsGrid.Children.Add(seasonHeaderLabel, 0, 0);
+
+            var gamesHeaderLabel = new Label { Text = Assets.Resources.Default.Games, TextColor = Color.White, BackgroundColor = Color.Black };
+            GoalieSeasonsGrid.Children.Add(gamesHeaderLabel, 1, 0);
+
+            var savePercentageHeaderLabel = new Label { Text = Assets.Resources.Default.SavePercentage, TextColor = Color.White, BackgroundColor = Color.Black };
+            GoalieSeasonsGrid.Children.Add(savePercentageHeaderLabel, 2, 0);
+
+            var gaaHeaderLabel = new Label { Text = Assets.Resources.Default.GAA, TextColor = Color.White, BackgroundColor = Color.Black };
+            GoalieSeasonsGrid.Children.Add(gaaHeaderLabel, 3, 0);
+
+            var shutoutsHeaderLabel = new Label { Text = Assets.Resources.Default.Shutouts, TextColor = Color.White, BackgroundColor = Color.Black };
+            GoalieSeasonsGrid.Children.Add(shutoutsHeaderLabel, 4, 0);
+
+            foreach (var seasonStats in CurrentPlayer.GoalieSeasonStats)
+            {
+                GoalieSeasonsGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                var rowCount = GoalieSeasonsGrid.RowDefinitions.Count();
+
+                var seasonLabel = new Label { Text = seasonStats.season.ToString(), BackgroundColor = Color.Black, TextColor = Color.White };
+                GoalieSeasonsGrid.Children.Add(seasonLabel, 0, rowCount - 1);
+
+                var matchesLabel = new Label { Text = seasonStats.matchesPlayed.ToString(), BackgroundColor = Color.Black, TextColor = Color.White };
+                GoalieSeasonsGrid.Children.Add(matchesLabel, 1, rowCount - 1);
+
+                var savePercentageLabel = new Label { Text = seasonStats.savePercentage.ToTwoDecimalString(), BackgroundColor = Color.Black, TextColor = Color.White };
+                GoalieSeasonsGrid.Children.Add(savePercentageLabel, 2, rowCount - 1);
+
+                var gaaLabel = new Label { Text = seasonStats.gaa.ToTwoDecimalString(), BackgroundColor = Color.Black, TextColor = Color.White };
+                GoalieSeasonsGrid.Children.Add(gaaLabel, 3, rowCount - 1);
+
+                var shutoutsLabel = new Label { Text = seasonStats.shutouts.ToString(), BackgroundColor = Color.Black, TextColor = Color.White };
+                GoalieSeasonsGrid.Children.Add(shutoutsLabel, 4, rowCount - 1);
+            }
         }
 
         private async void OnPreviousButtonClicked(object sender, EventArgs e)

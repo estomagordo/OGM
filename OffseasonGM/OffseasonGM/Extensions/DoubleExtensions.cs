@@ -12,5 +12,10 @@ namespace OffseasonGM.Extensions
         {
             return ((int)(d + 0.5)).ToString();
         }
+
+        public static string ToTwoDecimalString(this double d)
+        {
+            return d.ToString("F" + 2);
+        }
     }
 }

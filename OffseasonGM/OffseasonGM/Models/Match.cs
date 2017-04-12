@@ -68,6 +68,7 @@ namespace OffseasonGM.Models
 
         public int HomeShots { get; set; }
         public int AwayShots { get; set; }
+
         [Ignore]
         public int HomeGoalCount
         {
@@ -76,6 +77,7 @@ namespace OffseasonGM.Models
                 return Goals.Count(goal => goal.Team == HomeTeam);
             }
         }
+
         [Ignore]
         public int AwayGoalCount
         {
@@ -83,7 +85,7 @@ namespace OffseasonGM.Models
             {
                 return Goals.Count(goal => goal.Team == AwayTeam);
             }
-        }
+        }        
 
         public Match()
         {
@@ -97,6 +99,38 @@ namespace OffseasonGM.Models
             SeasonId = seasonId;
             HomeTeam = home;
             AwayTeam = away;
+        }
+
+        public bool GoaliePlayed(Player goalie)
+        {
+            return goalie == homeGoalie || goalie == awayGoalie;
+        }
+
+        public int ConcededForGoalie(Player goalie)
+        {
+            if (!GoaliePlayed(goalie))
+            {
+                return 0;
+            }
+
+            if (goalie == homeGoalie)
+            {
+                return Goals.Count(goal => goal.Team == AwayTeam);
+            }
+
+            return Goals.Count(goal => goal.Team == HomeTeam);
+        }
+
+        public int ShotsAgainstForGoalie(Player goalie)
+        {
+            if (!GoaliePlayed(goalie))
+            {
+                return 0;
+            }
+
+            return goalie == homeGoalie
+                ? AwayShots
+                : HomeShots;
         }
 
         public void PlayGame()
@@ -116,6 +150,11 @@ namespace OffseasonGM.Models
 
             foreach (var player in HomeTeam.Lineup.Concat(AwayTeam.Lineup))
             {
+                if (player.Position == Player.PlayerPosition.Goalie && !(player == homeGoalie || player == awayGoalie))
+                {
+                    continue;
+                }
+
                 player.Matches.Add(this);
             }
         }

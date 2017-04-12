@@ -134,6 +134,15 @@ namespace OffseasonGM.Assets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GAA.
+        /// </summary>
+        internal static string GAA {
+            get {
+                return ResourceManager.GetString("GAA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Games.
         /// </summary>
         internal static string Games {
@@ -206,6 +215,15 @@ namespace OffseasonGM.Assets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save %.
+        /// </summary>
+        internal static string SavePercentage {
+            get {
+                return ResourceManager.GetString("SavePercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saving.
         /// </summary>
         internal static string Saving {
@@ -229,6 +247,15 @@ namespace OffseasonGM.Assets.Resources {
         internal static string Shooting {
             get {
                 return ResourceManager.GetString("Shooting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shutouts.
+        /// </summary>
+        internal static string Shutouts {
+            get {
+                return ResourceManager.GetString("Shutouts", resourceCulture);
             }
         }
         

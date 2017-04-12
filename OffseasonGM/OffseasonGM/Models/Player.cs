@@ -166,6 +166,32 @@ namespace OffseasonGM.Models
             }
         }
 
+        [Ignore]
+        public List<(Season season, int matchesPlayed, double savePercentage, double gaa, int shutouts)> GoalieSeasonStats
+        {
+            get
+            {
+                var seasonStats = new List<(Season, int, double, double, int)>();
+
+                foreach (var season in Seasons)
+                {
+                    var matchesPlayed = Matches.Where(match => match.SeasonId == season.Id);
+
+                    var matchCount = matchesPlayed.Count();
+                    var concededCount = matchesPlayed.Sum(match => match.ConcededForGoalie(this));
+                    var shotsAgainstCount = matchesPlayed.Sum(match => match.ShotsAgainstForGoalie(this));
+
+                    var savePercentage = 100.0 * (1.0 - ((double)concededCount / (double)shotsAgainstCount));
+                    var gaa = (double)concededCount / (double)matchCount;
+                    var shutOuts = matchesPlayed.Count(match => match.ConcededForGoalie(this) == 0);
+
+                    seasonStats.Add((season, matchCount, savePercentage, gaa, shutOuts));
+                }
+
+                return seasonStats;
+            }
+        }
+
         public Player(int age, PlayerPosition position, Nation nation, FirstName firstName, LastName lastName)
         {
             Nation = nation;
@@ -270,6 +296,21 @@ namespace OffseasonGM.Models
         public override string ToString()
         {
             return FirstName.Name + " " + LastName.Name;
-        }        
+        }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Player);
+        }
+
+        public bool Equals(Player player)
+        {
+            return player != null && player.Id == Id;
+        }
     }
 }

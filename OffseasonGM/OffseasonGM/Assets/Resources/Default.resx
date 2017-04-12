@@ -182,4 +182,13 @@
   <data name="Season" xml:space="preserve">
     <value>Season</value>
   </data>
+  <data name="GAA" xml:space="preserve">
+    <value>GAA</value>
+  </data>
+  <data name="SavePercentage" xml:space="preserve">
+    <value>Save %</value>
+  </data>
+  <data name="Shutouts" xml:space="preserve">
+    <value>Shutouts</value>
+  </data>
 </root>
