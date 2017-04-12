@@ -184,6 +184,7 @@ Kyle|USA|Canada
 Lance|Canada|USA
 Lars|Denmark|Norway|Sweden
 Lasse|Sweden|Denmark|Finland
+Leroy|Canada
 Lewis|USA|Canada
 Libor|Sweden|Germany|Austria|Czechia|Slovakia
 Logan|USA|Canada
