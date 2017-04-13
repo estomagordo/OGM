@@ -52,7 +52,8 @@ namespace OffseasonGM
 
         private void RefreshView()
         {
-            LongTeamNameLabel.Text = string.Format("{0} ({1})", CurrentTeam.ToString(), CurrentTeam.FormatedSeasonRecord);
+            Title = CurrentTeam.ToString();
+            TeamRecordLabel.Text = CurrentTeam.FormatedSeasonRecord;            
             FillPlayerGrid();
         }
 

@@ -52,9 +52,9 @@ namespace OffseasonGM
 
         private void RefreshView()
         {
+            Title = CurrentPlayer.ToString();
             PositionLabel.Text = CurrentPlayer.ShortPosition;
             NationFlag.Source = ImageSource.FromResource(CurrentPlayer.Nation.FlagUri);
-            NameLabel.Text = CurrentPlayer.ToString();
 
             if (CurrentPlayer.Position == Player.PlayerPosition.Goalie)
             {

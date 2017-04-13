@@ -8,8 +8,7 @@
             <StackLayout Orientation="Horizontal">
                 <Button Text="&lt;" Clicked="CycleBackward" BackgroundColor="Black" TextColor="White" VerticalOptions="Center" HorizontalOptions="Start"/>
                 <Label x:Name="PositionLabel" BackgroundColor="Black" TextColor="White" VerticalOptions="Center"/>
-                <Image x:Name="NationFlag" BackgroundColor="Black" VerticalOptions="Center"/>
-                <Label x:Name="NameLabel" BackgroundColor="Black" TextColor="White" VerticalOptions="Center"/>
+                <Image x:Name="NationFlag" BackgroundColor="Black" VerticalOptions="Center"/>                
                 <Button Text="&gt;" Clicked="CycleForward" BackgroundColor="Black" TextColor="White" VerticalOptions="Center" HorizontalOptions="End"/>
             </StackLayout>
             <Grid x:Name="SkaterAttributeGrid" BackgroundColor="Black">
