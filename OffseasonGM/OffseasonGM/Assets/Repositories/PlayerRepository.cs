@@ -11,32 +11,35 @@ namespace OffseasonGM.Assets.Repositories
     public class PlayerRepository : IRepository
     {
         SQLiteConnection connection;
-        FirstNameRepository firstNameRepo;
-        LastNameRepository lastNameRepo;
-        NationRepository nationRepo;        
 
         public PlayerRepository(string dbPath)
         {
             connection = new SQLiteConnection(new SQLite.Net.Platform.Generic.SQLitePlatformGeneric(), dbPath);
-            firstNameRepo = new FirstNameRepository(dbPath);
-            lastNameRepo = new LastNameRepository(dbPath);
-            nationRepo = new NationRepository(dbPath);
         }
 
-        public Player InsertPlayer(Player player)
+        public void Save(Player player)
         {
-            try
+            if (player.Id == 0)
             {
-                connection.Insert(player);
-                return player;
+                Insert(player);
             }
-            catch (Exception ex)
+            else
             {
-                return null;
+                Update(player);
             }
         }
 
-        public List<Player> GetAllPlayers()
+        private void Insert(Player player)
+        {
+            connection.Insert(player);
+        }
+
+        private void Update(Player player)
+        {
+            connection.UpdateWithChildren(player);
+        }
+
+        public List<Player> GetAll()
         {
             return connection.GetAllWithChildren<Player>();
         }

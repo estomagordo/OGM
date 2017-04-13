@@ -348,6 +348,8 @@ namespace OffseasonGM.Assets.Managers
 
                 player.Team = team;
                 player.TeamId = team.Id;
+
+                PlayerRepo.Save(player);
             }
         }
 
@@ -411,6 +413,7 @@ namespace OffseasonGM.Assets.Managers
             TeamRepo = _repositoryLocator.Resolve<Team>(_dbPath) as TeamRepository;
             SeasonRepo = _repositoryLocator.Resolve<Season>(_dbPath) as SeasonRepository;
             MatchRepo = _repositoryLocator.Resolve<Match>(_dbPath) as MatchRepository;
+            PlayerRepo = _repositoryLocator.Resolve<Player>(_dbPath) as PlayerRepository;
         }
     }
 }
