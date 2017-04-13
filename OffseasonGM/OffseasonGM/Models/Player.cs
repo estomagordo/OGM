@@ -167,6 +167,20 @@ namespace OffseasonGM.Models
         }
 
         [Ignore]
+        public (int matchesPlayed, int goalCount, int assistCount, int pointCount) SkaterCareerStats
+        {
+            get
+            {
+                var matchCount = SkaterSeasonStats.Sum(season => season.matchesPlayed);
+                var goalCount = SkaterSeasonStats.Sum(season => season.goalCount);
+                var assistCount = SkaterSeasonStats.Sum(season => season.assistCount);
+                var pointCount = goalCount + assistCount;
+
+                return (matchCount, goalCount, assistCount, pointCount);
+            }
+        }
+
+        [Ignore]
         public List<(Season season, int matchesPlayed, double savePercentage, double gaa, int shutouts)> GoalieSeasonStats
         {
             get
@@ -189,6 +203,23 @@ namespace OffseasonGM.Models
                 }
 
                 return seasonStats;
+            }
+        }
+
+        [Ignore]
+        public (int matchesPlayed, double savePercentage, double gaa, int shutouts) GoalieCareerStats
+        {
+            get
+            {
+                var matchCount = Matches.Count();
+                var concededCount = Matches.Sum(match => match.ConcededForGoalie(this));
+                var shotsAgainstCount = Matches.Sum(match => match.ShotsAgainstForGoalie(this));
+
+                var savePercentage = 100.0 * (1.0 - ((double)concededCount / (double)shotsAgainstCount));
+                var gaa = (double)concededCount / (double)matchCount;
+                var shutOuts = Matches.Count(match => match.ConcededForGoalie(this) == 0);
+
+                return (matchCount, savePercentage, gaa, shutOuts);
             }
         }
 

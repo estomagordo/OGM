@@ -191,4 +191,7 @@
   <data name="Shutouts" xml:space="preserve">
     <value>Shutouts</value>
   </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
 </root>

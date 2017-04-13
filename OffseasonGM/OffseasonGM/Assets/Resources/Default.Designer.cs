@@ -267,5 +267,14 @@ namespace OffseasonGM.Assets.Resources {
                 return ResourceManager.GetString("Skating", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        internal static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
     }
 }
