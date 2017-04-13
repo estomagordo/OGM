@@ -6,9 +6,9 @@
     <ScrollView>
         <StackLayout Padding="10" BackgroundColor="Black">
             <StackLayout Orientation="Horizontal">
-                <Button Text="&lt;" Clicked="CycleBackward" BackgroundColor="Black" TextColor="White" VerticalOptions="Center"/>
+                <Button Text="&lt;" Clicked="CycleBackward" BackgroundColor="Black" TextColor="White" VerticalOptions="Center" HorizontalOptions="Start"/>
                 <Label x:Name="LongTeamNameLabel" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-                <Button Text="&gt;" Clicked="CycleForward" BackgroundColor="Black" TextColor="White" VerticalOptions="Center"/>
+                <Button Text="&gt;" Clicked="CycleForward" BackgroundColor="Black" TextColor="White" VerticalOptions="Center" HorizontalOptions="End"/>
             </StackLayout>
             <Grid x:Name="PlayerGrid">
                 <Grid.RowDefinitions>
