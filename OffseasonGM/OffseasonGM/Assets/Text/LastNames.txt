@@ -336,7 +336,7 @@ Richardson|Canada|USA
 Riggs|Canada|USA
 Robbins|USA|Canada
 Roberts|USA|Canada
-Robinaon|Canada|USA
+Robinson|Canada|USA
 Rodgers|USA|Canada
 Rodman|USA|Canada
 Rogers|Canada|USA
